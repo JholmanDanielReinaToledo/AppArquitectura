@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
-class ListEntries extends StatelessWidget {
-  const ListEntries({super.key});
+class NewSpentPage extends StatelessWidget {
+  const NewSpentPage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -13,19 +13,29 @@ class Home extends StatelessWidget {
         title: Text('FinTech'),
       ),
       body: FooterView(
+        footer: Footer(
+          backgroundColor: Colors.blue,
+          padding: EdgeInsets.all(5),
+          child: Text('Este es un pie de apgina personalizado!!'),
+        ),
         children: <Widget>[
           Padding(
             padding: EdgeInsets.only(top: 200),
             child: Center(
               child: Text('Home Page'),
             ),
+          ),
+          MaterialButton(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            disabledColor: Colors.grey,
+            color: Colors.lightGreen,
+            child: Text('Ver gastos'),
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '');
+            },
           )
         ],
-        footer: Footer(
-          backgroundColor: Colors.blue,
-          padding: EdgeInsets.all(5),
-          child: Text('Este es un pie de apgina personalizado!!'),
-        ),
       ),
     );
   }
