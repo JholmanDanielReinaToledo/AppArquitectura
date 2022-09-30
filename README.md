@@ -1,4 +1,4 @@
-# proyecto_prquitectura
+# proyecto_arquitectura
 
 A new Flutter project.
 
