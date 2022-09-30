@@ -47,7 +47,20 @@ class Home extends StatelessWidget {
             onPressed: () {
               Navigator.pushReplacementNamed(context, 'list_entries');
             },
-          )
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          MaterialButton(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            disabledColor: Colors.grey,
+            color: Colors.lightGreen,
+            child: Text('Nuevo gasto'),
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, 'new_spent');
+            },
+          ),
         ],
       ),
     );

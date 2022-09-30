@@ -1,15 +1,13 @@
-import 'dart:ffi';
-
 import 'package:flutter/cupertino.dart';
 
-class SpentFormProvider extends ChangeNotifier {
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+class SpendFormProvider extends ChangeNotifier {
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
+  String uid = "";
   int value = 0;
   String category = "";
   DateTime date = DateTime.now();
   String name = "";
-
   bool _estaCargando = false;
 
   bool get estaCargando => _estaCargando;
@@ -20,6 +18,6 @@ class SpentFormProvider extends ChangeNotifier {
   }
 
   bool isValidForm() {
-    return formKey.currentState?.validate() ?? false;
+    return formkey.currentState?.validate() ?? false;
   }
 }
