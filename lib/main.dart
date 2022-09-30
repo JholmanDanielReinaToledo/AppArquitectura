@@ -7,6 +7,7 @@ import 'package:proyecto_prquitectura/pages/new_spent_page.dart';
 import 'package:proyecto_prquitectura/providers/spend_form_provider.dart';
 import 'package:proyecto_prquitectura/providers/spent_list_provider.dart';
 import 'package:proyecto_prquitectura/services/auth_service.dart';
+import 'package:proyecto_prquitectura/widgets/test.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,12 +41,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Titulo',
       debugShowCheckedModeBanner: false,
-      initialRoute: 'home',
+      initialRoute: 'test',
       routes: {
         'home': (_) => Home(),
         'list_spents': (_) => ListSpents(),
         'list_entries': (_) => ListEntries(),
         'new_spent': (_) => NewSpentPage(),
+        'test': (_) => TestForm(),
       },
       theme: ThemeData.light().copyWith(scaffoldBackgroundColor: Colors.grey),
     );
