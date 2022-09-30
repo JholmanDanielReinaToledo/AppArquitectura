@@ -2,20 +2,25 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_prquitectura/providers/spend_form_provider.dart';
+import 'package:proyecto_prquitectura/providers/spent_list_provider.dart';
 import 'package:proyecto_prquitectura/ui/input_decorations.dart';
 
 class SpendForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loginForm = Provider.of<SpendFormProvider>(context);
+    // final listSpend = Provider.of<SpentListProvider>(context);
 
-    const List<String> list = <String>[
+    // Initial Selected Value
+    String dropdownvalue = 'Comida';
+
+    // List of items in our dropdown menu
+    var items = [
       'Transporte',
-      'Servicios',
-      'Gustico',
-      'Comida'
+      'Educación',
+      'Otros',
+      'Comida',
     ];
-    String primero = "";
 
     return Container(
       key: loginForm.formkey,
@@ -41,28 +46,26 @@ class SpendForm extends StatelessWidget {
             SizedBox(
               height: 50,
             ),
-            // DropdownButton<String>(
-            //   value: primero,
-            //   icon: const Icon(Icons.arrow_downward),
-            //   elevation: 16,
-            //   style: const TextStyle(color: Colors.deepPurple),
-            //   underline: Container(
-            //     height: 2,
-            //     color: Colors.deepPurpleAccent,
-            //   ),
-            //   onChanged: (String? value) {
-            //     // This is called when the user selects an item.
-            //     if (value != null) {
-            //       loginForm.category = value;
-            //     }
-            //   },
-            //   items: list.map<DropdownMenuItem<String>>((String value) {
-            //     return DropdownMenuItem<String>(
-            //       value: value,
-            //       child: Text(value),
-            //     );
-            //   }).toList(),
-            // ),
+            DropdownButton(
+              // Initial Value
+              value: dropdownvalue,
+
+              // Down Arrow Icon
+              icon: const Icon(Icons.keyboard_arrow_down),
+
+              // Array list of items
+              items: items.map((String items) {
+                return DropdownMenuItem(
+                  value: items,
+                  child: Text(items),
+                );
+              }).toList(),
+              // After selecting the desired option,it will
+              // change button value to selected value
+              onChanged: (String? newValue) {
+                print(newValue);
+              },
+            ),
             SizedBox(
               height: 30,
             ),
@@ -88,6 +91,9 @@ class SpendForm extends StatelessWidget {
                         await Future.delayed(Duration(seconds: 2));
 
                         loginForm.estaCargando = false;
+                        // Spent newSpent = new Spent();
+                        // newSpent.category = loginForm.category;
+                        // listSpend.insertSpend(newSpent);
                         Navigator.pushReplacementNamed(context, 'home');
                       })
           ],
