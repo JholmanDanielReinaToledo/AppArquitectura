@@ -23,7 +23,7 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => AuthService(),
         ),
-        ChangeNotifierProvider(
+        Provider<SpentListProvider>(
           create: (_) => SpentListProvider(),
         ),
       ],

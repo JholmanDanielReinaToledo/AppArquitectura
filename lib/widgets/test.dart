@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:proyecto_prquitectura/providers/spent_list_provider.dart';
 
 class SpendForm extends StatefulWidget {
   @override
@@ -14,6 +16,7 @@ class _SpendFormState extends State<SpendForm> {
 
   @override
   Widget build(BuildContext context) {
+    final list = Provider.of<SpentListProvider>(context);
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
