@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
         'list_spents': (_) => ListSpents(),
         'list_entries': (_) => ListEntries(),
         'new_spent': (_) => NewSpentPage(),
-        'test': (_) => TestForm(),
+        'test': (_) => SpendForm(),
       },
       theme: ThemeData.light().copyWith(scaffoldBackgroundColor: Colors.grey),
     );

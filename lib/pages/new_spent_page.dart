@@ -25,7 +25,7 @@ class NewSpentPage extends StatelessWidget {
         children: <Widget>[
           ChangeNotifierProvider(
             create: (_) => SpendFormProvider(),
-            child: SpendForm(),
+            child: SpendForm2(),
           ),
         ],
       ),

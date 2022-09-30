@@ -5,14 +5,14 @@ import 'package:proyecto_prquitectura/providers/spend_form_provider.dart';
 import 'package:proyecto_prquitectura/providers/spent_list_provider.dart';
 import 'package:proyecto_prquitectura/ui/input_decorations.dart';
 
-class SpendForm extends StatefulWidget {
-  const SpendForm({Key? key}) : super(key: key);
+class SpendForm2 extends StatefulWidget {
+  const SpendForm2({Key? key}) : super(key: key);
 
   @override
-  State<SpendForm> createState() => _SpendFormState();
+  State<SpendForm2> createState() => _SpendForm2State();
 }
 
-class _SpendFormState extends State<SpendForm> {
+class _SpendForm2State extends State<SpendForm2> {
   @override
   Widget build(BuildContext context) {
     final loginForm = Provider.of<SpendFormProvider>(context);

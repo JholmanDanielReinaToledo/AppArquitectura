@@ -1,18 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class TestForm extends StatefulWidget {
+class SpendForm extends StatefulWidget {
   @override
-  _TestFormState createState() => _TestFormState();
+  _SpendFormState createState() => _SpendFormState();
 }
 
-class _TestFormState extends State<TestForm> {
+class _SpendFormState extends State<SpendForm> {
   GlobalKey<FormState> keyForm = GlobalKey();
   TextEditingController nameCtrl = TextEditingController();
-  TextEditingController emailCtrl = TextEditingController();
-  TextEditingController mobileCtrl = TextEditingController();
+  TextEditingController valorCtrl = TextEditingController();
   TextEditingController passwordCtrl = TextEditingController();
-  TextEditingController repeatPassCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,86 +39,64 @@ class _TestFormState extends State<TestForm> {
     );
   }
 
-  String? gender = 'hombre';
+  String? categoria = 'hombre';
 
   Widget formUI() {
     return Column(
       children: <Widget>[
         formItemsDesign(
-            Icons.person,
+            Icons.assignment,
             TextFormField(
               controller: nameCtrl,
+              decoration: InputDecoration(
+                labelText: 'Nombre',
+              ),
+              validator: validateName,
+            )),
+        formItemsDesign(
+            Icons.attach_money,
+            TextFormField(
+              controller: valorCtrl,
               decoration: InputDecoration(
                 labelText: 'Valor',
               ),
               validator: validateNumber,
             )),
         formItemsDesign(
-            Icons.phone,
-            TextFormField(
-              controller: mobileCtrl,
-              decoration: InputDecoration(
-                labelText: 'Numero de telefono',
-              ),
-              keyboardType: TextInputType.phone,
-              maxLength: 10,
-              validator: validateMobile,
-            )),
-        formItemsDesign(
-            null,
+            Icons.abc,
             Column(children: <Widget>[
-              Text("Genero"),
+              Text("Categoria"),
               RadioListTile<String>(
-                title: const Text('Hombre'),
-                value: 'hombre',
-                groupValue: gender,
+                title: Text('Comida'),
+                value: 'Comida',
+                groupValue: categoria,
                 onChanged: (value) {
                   setState(() {
-                    gender = value;
+                    categoria = value;
                   });
                 },
               ),
               RadioListTile<String>(
-                title: const Text('Mujer'),
-                value: 'mujer',
-                groupValue: gender,
+                title: const Text('Transporte'),
+                value: 'Transporte',
+                groupValue: categoria,
                 onChanged: (value) {
                   setState(() {
-                    gender = value;
+                    categoria = value;
+                  });
+                },
+              ),
+              RadioListTile<String>(
+                title: const Text('Otros'),
+                value: 'Otros',
+                groupValue: categoria,
+                onChanged: (value) {
+                  setState(() {
+                    categoria = value;
                   });
                 },
               )
             ])),
-        formItemsDesign(
-            Icons.email,
-            TextFormField(
-              controller: emailCtrl,
-              decoration: InputDecoration(
-                labelText: 'Email',
-              ),
-              keyboardType: TextInputType.emailAddress,
-              maxLength: 32,
-              validator: validateEmail,
-            )),
-        formItemsDesign(
-            Icons.remove_red_eye,
-            TextFormField(
-              controller: passwordCtrl,
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Contraseña',
-              ),
-            )),
-        formItemsDesign(
-            Icons.remove_red_eye,
-            TextFormField(
-              controller: repeatPassCtrl,
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Repetir la Contraseña',
-              ),
-              validator: validatePassword,
-            )),
         GestureDetector(
             onTap: () {
               save();
@@ -154,18 +130,6 @@ class _TestFormState extends State<TestForm> {
     return '';
   }
 
-  String? validateName(String? value) {
-    String pattern = r'(^[a-zA-Z ]*$)';
-    RegExp regExp = RegExp(pattern);
-    if (!(value != null)) {
-      return "El nombre es necesario";
-    } else if (!regExp.hasMatch(value)) {
-      return "El nombre debe de ser a-z y A-Z";
-    }
-
-    return null;
-  }
-
   String? validateMobile(String? value) {
     String patttern = r'(^[0-9]*$)';
     RegExp regExp = RegExp(patttern);
@@ -186,6 +150,13 @@ class _TestFormState extends State<TestForm> {
     return null;
   }
 
+  String? validateName(String? value) {
+    if (value != null) {
+      return null;
+    }
+    return "El nombre es necesario";
+  }
+
   String? validateEmail(String? value) {
     String pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
@@ -202,8 +173,8 @@ class _TestFormState extends State<TestForm> {
   save() {
     if (keyForm.currentState!.validate()) {
       print("Nombre ${nameCtrl.text}");
-      print("Telefono ${mobileCtrl.text}");
-      print("Correo ${emailCtrl.text}");
+      print("Valor ${valorCtrl.text}");
+      print("Categoria $categoria");
       keyForm.currentState!.reset();
     }
   }
