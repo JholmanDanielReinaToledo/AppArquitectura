@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_prquitectura/pages/home.dart';
+import 'package:proyecto_prquitectura/pages/list_entries_page.dart';
 import 'package:proyecto_prquitectura/pages/list_spents_page.dart';
 import 'package:proyecto_prquitectura/services/auth_service.dart';
 
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
       routes: {
         'home': (_) => Home(),
         'list_spents': (_) => ListSpents(),
-        'list_entries': (_) => List
+        'list_entries': (_) => ListEntries(),
       },
       theme: ThemeData.light().copyWith(scaffoldBackgroundColor: Colors.grey),
     );

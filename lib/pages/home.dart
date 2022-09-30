@@ -32,7 +32,20 @@ class Home extends StatelessWidget {
             color: Colors.lightGreen,
             child: Text('Ver gastos'),
             onPressed: () {
-              Navigator.pushReplacementNamed(context, '');
+              Navigator.pushReplacementNamed(context, 'list_spents');
+            },
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          MaterialButton(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            disabledColor: Colors.grey,
+            color: Colors.lightGreen,
+            child: Text('Ver ingresos'),
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, 'list_entries');
             },
           )
         ],
