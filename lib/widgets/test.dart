@@ -20,7 +20,7 @@ class _SpendFormState extends State<SpendForm> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Registrarse'),
+          title: Text('Nuevo gasto'),
         ),
         body: SingleChildScrollView(
           child: Container(
@@ -42,7 +42,7 @@ class _SpendFormState extends State<SpendForm> {
     );
   }
 
-  String? categoria = 'hombre';
+  String? categoria = '';
 
   Widget formUI(SpentListProvider list) {
     return Column(
