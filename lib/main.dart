@@ -4,9 +4,11 @@ import 'package:proyecto_prquitectura/pages/home.dart';
 import 'package:proyecto_prquitectura/pages/list_entries_page.dart';
 import 'package:proyecto_prquitectura/pages/list_spents_page.dart';
 import 'package:proyecto_prquitectura/pages/new_spent_page.dart';
+import 'package:proyecto_prquitectura/providers/entries_list_provider.dart';
 import 'package:proyecto_prquitectura/providers/spend_form_provider.dart';
 import 'package:proyecto_prquitectura/providers/spent_list_provider.dart';
 import 'package:proyecto_prquitectura/services/auth_service.dart';
+import 'package:proyecto_prquitectura/widgets/entryForm.dart';
 import 'package:proyecto_prquitectura/widgets/test.dart';
 
 void main() {
@@ -25,6 +27,9 @@ class AppState extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => SpentListProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => EntryListProvider(),
         ),
       ],
       child: MyApp(),
@@ -48,6 +53,7 @@ class MyApp extends StatelessWidget {
         'list_entries': (_) => ListEntries(),
         'new_spent': (_) => SpendForm(),
         'test': (_) => SpendForm(),
+        'new_entry': (_) => EntryForm(),
       },
       theme: ThemeData.light().copyWith(scaffoldBackgroundColor: Colors.grey),
     );
