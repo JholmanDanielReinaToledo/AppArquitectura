@@ -18,12 +18,17 @@ class SpentListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  set insertSpend(Spent spent) {
+  /* set insertSpend(Spent spent) {
     spents.add(spent);
     notifyListeners();
-  }
+  } */
 
   get getSpend => spents;
+
+  void insertSpend(Spent newPennd) {
+    spents.add(newPennd);
+    notifyListeners();
+  }
 }
 
 class Spent {

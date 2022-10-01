@@ -10,7 +10,7 @@ import 'package:proyecto_prquitectura/services/auth_service.dart';
 import 'package:proyecto_prquitectura/widgets/test.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const AppState());
 }
 
 class AppState extends StatelessWidget {
@@ -23,7 +23,7 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => AuthService(),
         ),
-        Provider<SpentListProvider>(
+        ChangeNotifierProvider(
           create: (_) => SpentListProvider(),
         ),
       ],
@@ -41,12 +41,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Titulo',
       debugShowCheckedModeBanner: false,
-      initialRoute: 'test',
+      initialRoute: 'home',
       routes: {
         'home': (_) => Home(),
         'list_spents': (_) => ListSpents(),
         'list_entries': (_) => ListEntries(),
-        'new_spent': (_) => NewSpentPage(),
+        'new_spent': (_) => SpendForm(),
         'test': (_) => SpendForm(),
       },
       theme: ThemeData.light().copyWith(scaffoldBackgroundColor: Colors.grey),

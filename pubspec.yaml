@@ -30,7 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
   footer: ^0.0.4
-  provider:
+  provider: ^5.0.0
   http: ^0.13.3
   
 

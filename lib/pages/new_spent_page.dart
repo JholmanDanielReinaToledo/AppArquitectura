@@ -5,7 +5,9 @@ import 'package:footer/footer_view.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_prquitectura/providers/login_form_provider.dart';
 import 'package:proyecto_prquitectura/providers/spend_form_provider.dart';
+import 'package:proyecto_prquitectura/providers/spent_list_provider.dart';
 import 'package:proyecto_prquitectura/widgets/spend_form.dart';
+import 'package:proyecto_prquitectura/widgets/test.dart';
 
 class NewSpentPage extends StatelessWidget {
   const NewSpentPage({super.key});
@@ -23,10 +25,7 @@ class NewSpentPage extends StatelessWidget {
           child: Text('Este es un pie de apgina personalizado!!'),
         ),
         children: <Widget>[
-          ChangeNotifierProvider(
-            create: (_) => SpendFormProvider(),
-            child: SpendForm2(),
-          ),
+          SpendForm(),
         ],
       ),
     );

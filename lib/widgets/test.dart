@@ -27,7 +27,7 @@ class _SpendFormState extends State<SpendForm> {
             margin: EdgeInsets.all(60.0),
             child: Form(
               key: keyForm,
-              child: formUI(),
+              child: formUI(list),
             ),
           ),
         ),
@@ -44,7 +44,7 @@ class _SpendFormState extends State<SpendForm> {
 
   String? categoria = 'hombre';
 
-  Widget formUI() {
+  Widget formUI(SpentListProvider list) {
     return Column(
       children: <Widget>[
         formItemsDesign(
@@ -60,6 +60,7 @@ class _SpendFormState extends State<SpendForm> {
             Icons.attach_money,
             TextFormField(
               controller: valorCtrl,
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: 'Valor',
               ),
@@ -102,7 +103,9 @@ class _SpendFormState extends State<SpendForm> {
             ])),
         GestureDetector(
             onTap: () {
-              save();
+              Spent newPennd = save();
+              list.insertSpend(newPennd);
+              Navigator.pushReplacementNamed(context, 'list_spents');
             },
             child: Container(
               margin: EdgeInsets.all(30.0),
@@ -179,6 +182,12 @@ class _SpendFormState extends State<SpendForm> {
       print("Valor ${valorCtrl.text}");
       print("Categoria $categoria");
       keyForm.currentState!.reset();
+      Spent newSpend = new Spent();
+      newSpend.category = categoria!;
+      newSpend.value = int.parse(valorCtrl.text);
+      newSpend.name = nameCtrl.text;
+
+      return newSpend;
     }
   }
 }
