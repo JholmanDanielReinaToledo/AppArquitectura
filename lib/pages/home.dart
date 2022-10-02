@@ -61,6 +61,29 @@ class Home extends StatelessWidget {
               Navigator.pushReplacementNamed(context, 'new_spent');
             },
           ),
+          SizedBox(
+            height: 30,
+          ),
+          MaterialButton(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            disabledColor: Colors.grey,
+            color: Colors.lightGreen,
+            child: Text('Nuevo categoria de gasto'),
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, 'new_spend_category');
+            },
+          ),
+          MaterialButton(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            disabledColor: Colors.grey,
+            color: Colors.lightGreen,
+            child: Text('Lista de categorias de los gastos'),
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, 'list_spend_categories');
+            },
+          ),
         ],
       ),
     );

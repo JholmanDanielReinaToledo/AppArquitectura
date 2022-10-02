@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_prquitectura/pages/home.dart';
 import 'package:proyecto_prquitectura/pages/list_entries_page.dart';
+import 'package:proyecto_prquitectura/pages/list_spend_category.dart';
 import 'package:proyecto_prquitectura/pages/list_spents_page.dart';
+import 'package:proyecto_prquitectura/pages/new_spend_cagetory.dart';
 import 'package:proyecto_prquitectura/pages/new_spent_page.dart';
+import 'package:proyecto_prquitectura/providers/spend_categories_list.dart';
 import 'package:proyecto_prquitectura/providers/spend_form_provider.dart';
 import 'package:proyecto_prquitectura/providers/spent_list_provider.dart';
 import 'package:proyecto_prquitectura/services/auth_service.dart';
@@ -26,6 +29,9 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => SpentListProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => SpendCategoriesListProvider(),
+        ),
       ],
       child: MyApp(),
     );
@@ -35,7 +41,6 @@ class AppState extends StatelessWidget {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -48,6 +53,8 @@ class MyApp extends StatelessWidget {
         'list_entries': (_) => ListEntries(),
         'new_spent': (_) => SpendForm(),
         'test': (_) => SpendForm(),
+        'list_spend_categories': (_) => ListSpendCategories(),
+        'new_spend_category': (_) => SpendCategoryForm(),
       },
       theme: ThemeData.light().copyWith(scaffoldBackgroundColor: Colors.grey),
     );
