@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-Card card(String title, String subtitle, void Function()? submit) {
+Card card(
+    String title, String subtitle, String value, void Function()? submit) {
   return Card(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
     margin: EdgeInsets.all(15),
@@ -10,7 +11,13 @@ Card card(String title, String subtitle, void Function()? submit) {
         ListTile(
           contentPadding: EdgeInsets.fromLTRB(15, 10, 25, 0),
           title: Text(title),
-          subtitle: Text(subtitle),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(subtitle),
+              Text(value),
+            ],
+          ),
           leading: Icon(Icons.home),
         ),
         Row(

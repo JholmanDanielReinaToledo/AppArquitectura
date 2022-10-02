@@ -12,14 +12,23 @@ class ListSpents extends StatelessWidget {
     final list = Provider.of<SpentListProvider>(context);
     print(list.spents);
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Listado de gastos'),
+        leading: MaterialButton(
+          child: Icon(Icons.arrow_left_rounded, color: Colors.white),
+          onPressed: () => Navigator.pushReplacementNamed(context, 'home'),
+        ),
+      ),
       body: MediaQuery.removePadding(
         context: context,
         child: ListView.builder(
-          itemCount: 10,
+          itemCount: list.spents.length,
           itemBuilder: (BuildContext context, int index) {
+            Spent spend = list.spents[index];
             return card(
-              (index + 1).toString(),
-              ("Sub ${index + 1}"),
+              spend!.name,
+              spend!.category,
+              "${spend.value}",
               () => print(index),
             );
           },

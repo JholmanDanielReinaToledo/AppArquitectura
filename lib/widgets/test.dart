@@ -26,6 +26,7 @@ class _SpendFormState extends State<SpendForm> {
           child: Container(
             margin: EdgeInsets.all(60.0),
             child: Form(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               key: keyForm,
               child: formUI(list),
             ),
@@ -64,7 +65,7 @@ class _SpendFormState extends State<SpendForm> {
               decoration: InputDecoration(
                 labelText: 'Valor',
               ),
-              validator: validateNumber,
+              validator: validateValue,
             )),
         formItemsDesign(
             Icons.abc,
@@ -104,8 +105,25 @@ class _SpendFormState extends State<SpendForm> {
         GestureDetector(
             onTap: () {
               Spent newPennd = save();
-              list.insertSpend(newPennd);
-              Navigator.pushReplacementNamed(context, 'list_spents');
+
+              if (newPennd != null) {
+                list.insertSpend(newPennd);
+                Navigator.pushReplacementNamed(context, 'list_spents');
+              } else {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: Text("Error"),
+                    content: Text("Ha ocurrido un error"),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: Text('Ok'),
+                      ),
+                    ],
+                  ),
+                );
+              }
             },
             child: Container(
               margin: EdgeInsets.all(30.0),
@@ -137,12 +155,22 @@ class _SpendFormState extends State<SpendForm> {
   }
 
   String? validateMobile(String? value) {
-    String patttern = r'(^[0-9]*$)';
-    RegExp regExp = RegExp(patttern);
     if (value?.length == 0) {
       return "El telefono es necesario";
     } else if (value?.length != 10) {
       return "El numero debe tener 10 digitos";
+    }
+    return null;
+  }
+
+  String? validateValue(String? value) {
+    String patttern = r'^(\d|-)?(\d|,)*\.?\d*$';
+    RegExp regExp = RegExp(patttern);
+    if (value == null) {
+      return "El valor es necesario";
+    } else if (!regExp.hasMatch(value)) {
+      print(regExp.hasMatch(value));
+      return "Formato incorrecto";
     }
     return null;
   }
@@ -184,7 +212,9 @@ class _SpendFormState extends State<SpendForm> {
       keyForm.currentState!.reset();
       Spent newSpend = new Spent();
       newSpend.category = categoria!;
-      newSpend.value = int.parse(valorCtrl.text);
+      try {
+        newSpend.value = int.parse(valorCtrl.text);
+      } catch (e) {}
       newSpend.name = nameCtrl.text;
 
       return newSpend;
