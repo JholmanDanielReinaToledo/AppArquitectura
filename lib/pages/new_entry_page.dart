@@ -15,20 +15,25 @@ class NewSpentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
+      
       appBar: AppBar(
+        
         title: Text('FinTech'),
       ),
-      body: FooterView(
-        footer: Footer(
-          backgroundColor: Colors.blue,
-          padding: EdgeInsets.all(5),
-          child: Text('Este es un pie de apgina personalizado!!'),
-        ),
-        children: <Widget>[
+      body: 
+      //FooterView(
+        //footer: Footer(
+        //  backgroundColor: Colors.blue,
+        //  padding: EdgeInsets.all(5),
+        //  child: Text('Este es un pie de apgina personalizado!!'),
+        //),
+        //children: 
+        //<Widget>[
           EntryForm(),
-        ],
-      ),
+        //],
+      //),
     );
   }
 }

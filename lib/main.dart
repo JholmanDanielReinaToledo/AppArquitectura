@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:proyecto_prquitectura/pages/home.dart';
-import 'package:proyecto_prquitectura/pages/list_entries_page.dart';
-import 'package:proyecto_prquitectura/pages/list_spents_page.dart';
-import 'package:proyecto_prquitectura/pages/new_spent_page.dart';
+import 'package:proyecto_prquitectura/pages/pages.dart';
 import 'package:proyecto_prquitectura/providers/entries_list_provider.dart';
-import 'package:proyecto_prquitectura/providers/spend_form_provider.dart';
 import 'package:proyecto_prquitectura/providers/spent_list_provider.dart';
 import 'package:proyecto_prquitectura/services/auth_service.dart';
 import 'package:proyecto_prquitectura/widgets/entryForm.dart';
@@ -46,8 +42,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Titulo',
       debugShowCheckedModeBanner: false,
-      initialRoute: 'home',
+      initialRoute: 'login',
       routes: {
+        'login':(_) => LoginPage(),
+        'register': (_) => RegisterPage(),
         'home': (_) => Home(),
         'list_spents': (_) => ListSpents(),
         'list_entries': (_) => ListEntries(),

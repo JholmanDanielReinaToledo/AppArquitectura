@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_prquitectura/providers/entries_list_provider.dart';
@@ -17,10 +16,20 @@ class _EntryFormState extends State<EntryForm> {
   @override
   Widget build(BuildContext context) {
     final list = Provider.of<EntryListProvider>(context);
+
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: Text('Nuevo Ingreso'),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, 'home');
+              },
+              icon: Icon(Icons.arrow_back_outlined),
+            ),
+          ],
         ),
         body: SingleChildScrollView(
           child: Container(
@@ -45,6 +54,16 @@ class _EntryFormState extends State<EntryForm> {
   String? categoria = '';
 
   Widget formUI(EntryListProvider list) {
+
+    const List<String> listCateg = <String>[
+      "Transporte",
+      "Servicios",
+      "Gustico",
+      "Comida"
+    ];
+
+
+
     return Column(
       children: <Widget>[
         formItemsDesign(
@@ -70,36 +89,55 @@ class _EntryFormState extends State<EntryForm> {
             Icons.abc,
             Column(children: <Widget>[
               Text("Categoria"),
-              RadioListTile<String>(
-                title: Text('Comida'),
-                value: 'Comida',
-                groupValue: categoria,
+
+              // RadioListTile<String>(
+              //   title: Text('Comida'),
+              //   value: 'Comida',
+              //   groupValue: categoria,
+              //   onChanged: (value) {
+              //     setState(() {
+              //       categoria = value;
+              //     });
+              //   },
+              // ),
+              // RadioListTile<String>(
+              //   title: const Text('Transporte'),
+              //   value: 'Transporte',
+              //   groupValue: categoria,
+              //   onChanged: (value) {
+              //     setState(() {
+              //       categoria = value;
+              //     });
+              //   },
+              // ),
+              // RadioListTile<String>(
+              //   title: const Text('Otros'),
+              //   value: 'Otros',
+              //   groupValue: categoria,
+              //   onChanged: (value) {
+              //     setState(() {
+              //       categoria = value;
+              //     });
+              //   },
+              // )
+
+              DropdownButton<String>(
+                
+                icon: const Icon(Icons.arrow_downward),
+                style: const TextStyle(color:Color(0xFF03A0FE), fontSize: 15, fontWeight: FontWeight.bold  ),
+                items: listCateg.map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
                 onChanged: (value) {
                   setState(() {
                     categoria = value;
                   });
                 },
               ),
-              RadioListTile<String>(
-                title: const Text('Transporte'),
-                value: 'Transporte',
-                groupValue: categoria,
-                onChanged: (value) {
-                  setState(() {
-                    categoria = value;
-                  });
-                },
-              ),
-              RadioListTile<String>(
-                title: const Text('Otros'),
-                value: 'Otros',
-                groupValue: categoria,
-                onChanged: (value) {
-                  setState(() {
-                    categoria = value;
-                  });
-                },
-              )
+
             ])),
         GestureDetector(
             onTap: () {
