@@ -84,6 +84,13 @@ class Home extends StatelessWidget {
               Navigator.pushReplacementNamed(context, 'list_spend_categories');
             },
           ),
+          MaterialButton(
+            color: Colors.lightGreen,
+            child: Text('Nuevo ingreso'),
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, 'new_entry');
+            },
+          ),
         ],
       ),
     );
