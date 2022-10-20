@@ -8,21 +8,20 @@ class ListEntries extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     final list = Provider.of<EntryListProvider>(context);
     print(list.entries);
     return Scaffold(
       appBar: AppBar(
-          title: Text('Ingresos'),
-          actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, 'home');
-              },
-              icon: Icon(Icons.arrow_back_outlined),
-            ),
-          ],
-        ),
+        title: Text('Ingresos'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, 'home');
+            },
+            icon: Icon(Icons.arrow_back_outlined),
+          ),
+        ],
+      ),
       body: MediaQuery.removePadding(
         context: context,
         child: ListView.builder(
@@ -31,6 +30,7 @@ class ListEntries extends StatelessWidget {
             return card(
               (index + 1).toString(),
               ("Sub ${index + 1}"),
+              '',
               () => print(index),
             );
           },

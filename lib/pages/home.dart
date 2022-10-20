@@ -17,79 +17,87 @@ class Home extends StatelessWidget {
         footer: Footer(
           backgroundColor: Colors.blue,
           padding: EdgeInsets.all(5),
-          child: Text('Este es un pie de apgina personalizado!!'),
+          child: Text(''),
         ),
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(top: 200),
-            child: Center(
-              child: Text('Home Page'),
+          SizedBox(
+            height: 30,
+          ),
+          Container(
+            height: 50,
+            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+            child: ElevatedButton(
+              child: Text('Ver gastos'),
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, 'list_spents');
+              },
             ),
           ),
-          MaterialButton(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            disabledColor: Colors.grey,
-            color: Colors.blue,
-            child: Text('Ver gastos'),
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, 'list_spents');
-            },
+          SizedBox(
+            height: 30,
+          ),
+          Container(
+            height: 50,
+            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+            child: ElevatedButton(
+              child: Text('Ver ingresos'),
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, 'list_entries');
+              },
+            ),
           ),
           SizedBox(
             height: 30,
           ),
-          MaterialButton(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            disabledColor: Colors.grey,
-            color: Colors.blue,
-            child: Text('Ver ingresos'),
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, 'list_entries');
-            },
+          Container(
+            height: 50,
+            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+            child: ElevatedButton(
+              child: Text('Nuevo gasto'),
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, 'new_spent');
+              },
+            ),
           ),
           SizedBox(
             height: 30,
           ),
-          MaterialButton(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            disabledColor: Colors.grey,
-            color: Colors.blue,
-            child: Text('Nuevo gasto'),
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, 'new_spent');
-            },
+          Container(
+            height: 50,
+            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+            child: ElevatedButton(
+              child: Text('Nuevo categoria de gasto'),
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, 'new_spend_category');
+              },
+            ),
           ),
           SizedBox(
             height: 30,
           ),
-          MaterialButton(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            disabledColor: Colors.grey,
-            color: Colors.blue,
-            child: Text('Nuevo categoria de gasto'),
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, 'new_spend_category');
-            },
+          Container(
+            height: 50,
+            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+            child: ElevatedButton(
+              child: Text('Lista de categorias de los gastos'),
+              onPressed: () {
+                Navigator.pushReplacementNamed(
+                    context, 'list_spend_categories');
+              },
+            ),
           ),
-          MaterialButton(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            disabledColor: Colors.grey,
-            child: Text('Lista de categorias de los gastos'),
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, 'list_spend_categories');
-            },
+          SizedBox(
+            height: 30,
           ),
-          MaterialButton(
-            color: Colors.lightGreen,
-            child: Text('Nuevo ingreso'),
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, 'new_entry');
-            },
+          Container(
+            height: 50,
+            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+            child: ElevatedButton(
+              child: Text('Nuevo ingreso'),
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, 'new_entry');
+              },
+            ),
           ),
         ],
       ),
