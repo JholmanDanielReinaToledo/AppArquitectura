@@ -9,6 +9,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('FinTech'),
       ),
@@ -29,7 +30,7 @@ class Home extends StatelessWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             disabledColor: Colors.grey,
-            color: Colors.lightGreen,
+            color: Colors.blue,
             child: Text('Ver gastos'),
             onPressed: () {
               Navigator.pushReplacementNamed(context, 'list_spents');
@@ -42,7 +43,7 @@ class Home extends StatelessWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             disabledColor: Colors.grey,
-            color: Colors.lightGreen,
+            color: Colors.blue,
             child: Text('Ver ingresos'),
             onPressed: () {
               Navigator.pushReplacementNamed(context, 'list_entries');
@@ -55,7 +56,7 @@ class Home extends StatelessWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             disabledColor: Colors.grey,
-            color: Colors.lightGreen,
+            color: Colors.blue,
             child: Text('Nuevo gasto'),
             onPressed: () {
               Navigator.pushReplacementNamed(context, 'new_spent');
@@ -68,7 +69,7 @@ class Home extends StatelessWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             disabledColor: Colors.grey,
-            color: Colors.lightGreen,
+            color: Colors.blue,
             child: Text('Nuevo categoria de gasto'),
             onPressed: () {
               Navigator.pushReplacementNamed(context, 'new_spend_category');
@@ -78,7 +79,6 @@ class Home extends StatelessWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             disabledColor: Colors.grey,
-            color: Colors.lightGreen,
             child: Text('Lista de categorias de los gastos'),
             onPressed: () {
               Navigator.pushReplacementNamed(context, 'list_spend_categories');
