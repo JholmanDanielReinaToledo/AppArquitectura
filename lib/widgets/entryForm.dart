@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_prquitectura/providers/entries_list_provider.dart';
 
@@ -54,15 +55,12 @@ class _EntryFormState extends State<EntryForm> {
   String? categoria = '';
 
   Widget formUI(EntryListProvider list) {
-
     const List<String> listCateg = <String>[
       "Transporte",
       "Servicios",
       "Gustico",
       "Comida"
     ];
-
-
 
     return Column(
       children: <Widget>[
@@ -80,6 +78,9 @@ class _EntryFormState extends State<EntryForm> {
             TextFormField(
               controller: valorCtrl,
               keyboardType: TextInputType.number,
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.digitsOnly
+              ],
               decoration: InputDecoration(
                 labelText: 'Valor',
               ),
@@ -122,9 +123,11 @@ class _EntryFormState extends State<EntryForm> {
               // )
 
               DropdownButton<String>(
-                
                 icon: const Icon(Icons.arrow_downward),
-                style: const TextStyle(color:Color(0xFF03A0FE), fontSize: 15, fontWeight: FontWeight.bold  ),
+                style: const TextStyle(
+                    color: Color(0xFF03A0FE),
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold),
                 items: listCateg.map((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
@@ -137,7 +140,6 @@ class _EntryFormState extends State<EntryForm> {
                   });
                 },
               ),
-
             ])),
         GestureDetector(
             onTap: () {
@@ -220,12 +222,12 @@ class _EntryFormState extends State<EntryForm> {
       print("Valor ${valorCtrl.text}");
       print("Categoria $categoria");
       keyForm.currentState!.reset();
-      Entry newSpend = new Entry();
-      newSpend.category = categoria!;
-      newSpend.value = int.parse(valorCtrl.text);
-      newSpend.name = nameCtrl.text;
+      Entry newEntry = new Entry();
+      newEntry.category = categoria!;
+      newEntry.value = int.parse(valorCtrl.text);
+      newEntry.name = nameCtrl.text;
 
-      return newSpend;
+      return newEntry;
     }
   }
 }

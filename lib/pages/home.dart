@@ -29,6 +29,7 @@ class Home extends StatelessWidget {
         children: <Widget>[
           Text('Total ingresos ${entriesProvider.total.toString()}'),
           Text('Total gastos ${spendsProvider.total.toString()}'),
+          Text('Total gastos ${entriesProvider.total - spendsProvider.total}'),
         ],
       ),
     );

@@ -1,9 +1,14 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_prquitectura/providers/entries_list_provider.dart';
 import 'package:proyecto_prquitectura/providers/spent_list_provider.dart';
 
 class SpendForm extends StatefulWidget {
+  const SpendForm({Key? key}) : super(key: key);
+
   @override
   _SpendFormState createState() => _SpendFormState();
 }
@@ -13,10 +18,20 @@ class _SpendFormState extends State<SpendForm> {
   TextEditingController nameCtrl = TextEditingController();
   TextEditingController valorCtrl = TextEditingController();
   TextEditingController passwordCtrl = TextEditingController();
+  late EntryListProvider entryProvider;
+  late SpentListProvider spendProvider;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final list = Provider.of<SpentListProvider>(context);
+    setState(() {
+      spendProvider = Provider.of<SpentListProvider>(context);
+      entryProvider = Provider.of<EntryListProvider>(context);
+    });
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -24,11 +39,11 @@ class _SpendFormState extends State<SpendForm> {
         ),
         body: SingleChildScrollView(
           child: Container(
-            margin: EdgeInsets.all(60.0),
+            margin: EdgeInsets.all(10.0),
             child: Form(
-              autovalidateMode: AutovalidateMode.onUserInteraction,
+              autovalidateMode: AutovalidateMode.always,
               key: keyForm,
-              child: formUI(list),
+              child: formUI(spendProvider),
             ),
           ),
         ),
@@ -147,6 +162,10 @@ class _SpendFormState extends State<SpendForm> {
     );
   }
 
+  String validateGasto(String value) {
+    return '';
+  }
+
   String validatePassword(String? value) {
     if (value != passwordCtrl.text) {
       return "Las contraseñas no coinciden";
@@ -171,6 +190,12 @@ class _SpendFormState extends State<SpendForm> {
     } else if (!regExp.hasMatch(value)) {
       print(regExp.hasMatch(value));
       return "Formato incorrecto";
+    } else {
+      if (value != null && !value.isEmpty) {
+        if (int.parse(value) > (entryProvider.total - spendProvider.total)) {
+          return 'El gasto excede el dinero disponible';
+        }
+      }
     }
     return null;
   }
