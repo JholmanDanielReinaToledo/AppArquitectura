@@ -10,7 +10,7 @@ class ListSpents extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final list = Provider.of<SpentListProvider>(context);
-    print(list.spents);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Listado de gastos'),

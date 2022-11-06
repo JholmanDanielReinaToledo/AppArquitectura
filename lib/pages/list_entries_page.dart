@@ -25,12 +25,13 @@ class ListEntries extends StatelessWidget {
       body: MediaQuery.removePadding(
         context: context,
         child: ListView.builder(
-          itemCount: 10,
+          itemCount: list.entries.length,
           itemBuilder: (BuildContext context, int index) {
+            Entry spend = list.entries[index];
             return card(
-              (index + 1).toString(),
-              ("Sub ${index + 1}"),
-              '',
+              spend!.name,
+              spend!.category,
+              "${spend.value}",
               () => print(index),
             );
           },

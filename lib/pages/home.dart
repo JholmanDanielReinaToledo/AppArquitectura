@@ -2,14 +2,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:footer/footer.dart';
 import 'package:footer/footer_view.dart';
+import 'package:provider/provider.dart';
+import 'package:proyecto_prquitectura/providers/entries_list_provider.dart';
+import 'package:proyecto_prquitectura/providers/spent_list_provider.dart';
+import 'package:proyecto_prquitectura/widgets/drawer.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final entriesProvider = Provider.of<EntryListProvider>(context);
+    final spendsProvider = Provider.of<SpentListProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
+      drawer: DrawerPropio(),
       appBar: AppBar(
         title: Text('FinTech'),
       ),
@@ -17,88 +24,11 @@ class Home extends StatelessWidget {
         footer: Footer(
           backgroundColor: Colors.blue,
           padding: EdgeInsets.all(5),
-          child: Text(''),
+          child: Text('Total ingresos ${entriesProvider.total.toString()}'),
         ),
         children: <Widget>[
-          SizedBox(
-            height: 30,
-          ),
-          Container(
-            height: 50,
-            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-            child: ElevatedButton(
-              child: Text('Ver gastos'),
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, 'list_spents');
-              },
-            ),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          Container(
-            height: 50,
-            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-            child: ElevatedButton(
-              child: Text('Ver ingresos'),
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, 'list_entries');
-              },
-            ),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          Container(
-            height: 50,
-            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-            child: ElevatedButton(
-              child: Text('Nuevo gasto'),
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, 'new_spent');
-              },
-            ),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          Container(
-            height: 50,
-            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-            child: ElevatedButton(
-              child: Text('Nuevo categoria de gasto'),
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, 'new_spend_category');
-              },
-            ),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          Container(
-            height: 50,
-            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-            child: ElevatedButton(
-              child: Text('Lista de categorias de los gastos'),
-              onPressed: () {
-                Navigator.pushReplacementNamed(
-                    context, 'list_spend_categories');
-              },
-            ),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          Container(
-            height: 50,
-            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-            child: ElevatedButton(
-              child: Text('Nuevo ingreso'),
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, 'new_entry');
-              },
-            ),
-          ),
+          Text('Total ingresos ${entriesProvider.total.toString()}'),
+          Text('Total gastos ${spendsProvider.total.toString()}'),
         ],
       ),
     );
