@@ -224,7 +224,9 @@ class _EntryFormState extends State<EntryForm> {
       keyForm.currentState!.reset();
       Entry newEntry = new Entry();
       newEntry.category = categoria!;
-      newEntry.value = int.parse(valorCtrl.text);
+      print(valorCtrl.text.runtimeType);
+      print(valorCtrl.text);
+      newEntry.value = int.parse(valorCtrl.text.trim());
       newEntry.name = nameCtrl.text;
 
       return newEntry;
