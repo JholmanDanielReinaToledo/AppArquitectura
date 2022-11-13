@@ -112,8 +112,7 @@ class _SpendCategoryFormState extends State<SpendCategoryForm> {
   save() {
     if (keyForm.currentState!.validate()) {
       print("Nombre ${nameCtrl.text}");
-      SpendCategory newSpendCategory = SpendCategory();
-      newSpendCategory.name = nameCtrl.text!;
+      SpendCategory newSpendCategory = SpendCategory(name: nameCtrl.text!);
       keyForm.currentState!.reset();
 
       return newSpendCategory;

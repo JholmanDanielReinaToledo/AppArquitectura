@@ -29,8 +29,8 @@ class ListEntries extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             Entry spend = list.entries[index];
             return card(
-              spend!.name,
-              spend!.category,
+              spend.name,
+              spend.category,
               "${spend.value}",
               () => print(index),
             );

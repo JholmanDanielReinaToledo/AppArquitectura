@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_prquitectura/providers/spend_categories_list.dart';
 import 'package:proyecto_prquitectura/providers/spend_form_provider.dart';
 import 'package:proyecto_prquitectura/providers/spent_list_provider.dart';
 import 'package:proyecto_prquitectura/ui/input_decorations.dart';
@@ -16,13 +17,7 @@ class _SpendForm2State extends State<SpendForm2> {
   @override
   Widget build(BuildContext context) {
     final loginForm = Provider.of<SpendFormProvider>(context);
-
-    final items = [
-      'Transporte',
-      'Educación',
-      'Otros',
-      'Comida',
-    ];
+    final spendCatProvider = Provider.of<SpendCategoriesListProvider>(context);
 
     return Scaffold(
       key: loginForm.formkey,
@@ -48,9 +43,14 @@ class _SpendForm2State extends State<SpendForm2> {
             SizedBox(
               height: 50,
             ),
-            DropdownButtonFormField<String>(
-              items: items.map(buildMenuItem).toList(),
-              onChanged: (String? newValue) => {
+            DropdownButtonFormField<SpendCategory>(
+              items: spendCatProvider.categories
+                  .map<DropdownMenuItem<SpendCategory>>((e) {
+                return DropdownMenuItem<SpendCategory>(
+                  child: Text(e.name),
+                );
+              }).toList(),
+              onChanged: (SpendCategory? newValue) => {
                 print(newValue) // value = newValue,
               },
             ),

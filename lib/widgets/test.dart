@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_prquitectura/providers/entries_list_provider.dart';
+import 'package:proyecto_prquitectura/providers/spend_categories_list.dart';
 import 'package:proyecto_prquitectura/providers/spent_list_provider.dart';
 
 class SpendForm extends StatefulWidget {
@@ -17,6 +18,8 @@ class _SpendFormState extends State<SpendForm> {
   TextEditingController passwordCtrl = TextEditingController();
   late EntryListProvider entryProvider;
   late SpentListProvider spendProvider;
+  late SpendCategoriesListProvider spendCatProvider;
+  SpendCategory? categoria;
 
   @override
   void initState() {
@@ -28,6 +31,7 @@ class _SpendFormState extends State<SpendForm> {
     setState(() {
       spendProvider = Provider.of<SpentListProvider>(context);
       entryProvider = Provider.of<EntryListProvider>(context);
+      spendCatProvider = Provider.of<SpendCategoriesListProvider>(context);
     });
     return MaterialApp(
       home: Scaffold(
@@ -55,65 +59,53 @@ class _SpendFormState extends State<SpendForm> {
     );
   }
 
-  String? categoria = '';
-
   Widget formUI(SpentListProvider list) {
+    print(spendCatProvider.categories.toString());
     return Column(
       children: <Widget>[
         formItemsDesign(
-            Icons.assignment,
-            TextFormField(
-              controller: nameCtrl,
-              decoration: InputDecoration(
-                labelText: 'Nombre',
-              ),
-              validator: validateName,
-            )),
+          Icons.assignment,
+          TextFormField(
+            controller: nameCtrl,
+            decoration: InputDecoration(
+              labelText: 'Nombre',
+            ),
+            validator: validateName,
+          ),
+        ),
         formItemsDesign(
-            Icons.attach_money,
-            TextFormField(
-              controller: valorCtrl,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                labelText: 'Valor',
-              ),
-              validator: validateValue,
-            )),
-        formItemsDesign(
-            Icons.abc,
-            Column(children: <Widget>[
-              Text("Categoria"),
-              RadioListTile<String>(
-                title: Text('Comida'),
-                value: 'Comida',
-                groupValue: categoria,
-                onChanged: (value) {
+          Icons.attach_money,
+          TextFormField(
+            controller: valorCtrl,
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+              labelText: 'Valor',
+            ),
+            validator: validateValue,
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 7),
+          child: Card(
+            child: ListTile(
+              title: DropdownButtonFormField<SpendCategory>(
+                value: categoria,
+                items: spendCatProvider.categories
+                    .map<DropdownMenuItem<SpendCategory>>((e) {
+                  return DropdownMenuItem<SpendCategory>(
+                    child: Text(e.name),
+                    value: e,
+                  );
+                }).toList(),
+                onChanged: (SpendCategory? newValue) {
                   setState(() {
-                    categoria = value;
+                    categoria = newValue;
                   });
                 },
               ),
-              RadioListTile<String>(
-                title: const Text('Transporte'),
-                value: 'Transporte',
-                groupValue: categoria,
-                onChanged: (value) {
-                  setState(() {
-                    categoria = value;
-                  });
-                },
-              ),
-              RadioListTile<String>(
-                title: const Text('Otros'),
-                value: 'Otros',
-                groupValue: categoria,
-                onChanged: (value) {
-                  setState(() {
-                    categoria = value;
-                  });
-                },
-              )
-            ])),
+            ),
+          ),
+        ),
         GestureDetector(
             onTap: () {
               Spent newPennd = save();
@@ -233,7 +225,9 @@ class _SpendFormState extends State<SpendForm> {
       print("Categoria $categoria");
       keyForm.currentState!.reset();
       Spent newSpend = new Spent();
-      newSpend.category = categoria!;
+      if (categoria?.name != null) {
+        newSpend.category = categoria?.name ?? '';
+      }
       try {
         newSpend.value = int.parse(valorCtrl.text);
       } catch (e) {}

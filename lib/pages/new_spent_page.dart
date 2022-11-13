@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:footer/footer.dart';
 import 'package:footer/footer_view.dart';
-import 'package:proyecto_prquitectura/widgets/test.dart';
+import 'package:proyecto_prquitectura/widgets/spend_form.dart';
 
 class NewSpentPage extends StatelessWidget {
   const NewSpentPage({super.key});
@@ -19,7 +19,7 @@ class NewSpentPage extends StatelessWidget {
           child: Text('Este es un pie de apgina personalizado!!'),
         ),
         children: <Widget>[
-          SpendForm(),
+          SpendForm2(),
         ],
       ),
     );

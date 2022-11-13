@@ -69,6 +69,7 @@ class _EntryFormState extends State<EntryForm> {
             TextFormField(
               controller: nameCtrl,
               decoration: InputDecoration(
+                border: OutlineInputBorder(),
                 labelText: 'Nombre',
               ),
               validator: validateName,
@@ -82,6 +83,7 @@ class _EntryFormState extends State<EntryForm> {
                 FilteringTextInputFormatter.digitsOnly
               ],
               decoration: InputDecoration(
+                border: OutlineInputBorder(),
                 labelText: 'Valor',
               ),
               validator: validateNumber,
