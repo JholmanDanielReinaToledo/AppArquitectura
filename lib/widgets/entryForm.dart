@@ -91,30 +91,14 @@ class _EntryFormState extends State<EntryForm> {
             ),
           ),
         ),
-        GestureDetector(
-            onTap: () {
-              Entry newPennd = save();
-              list.insertEntry(newPennd);
-              Navigator.pushReplacementNamed(context, 'list_entries');
-            },
-            child: Container(
-              margin: EdgeInsets.all(30.0),
-              alignment: Alignment.center,
-              decoration: ShapeDecoration(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0)),
-                gradient: LinearGradient(colors: [
-                  Color(0xFF0EDED2),
-                  Color(0xFF03A0FE),
-                ], begin: Alignment.topLeft, end: Alignment.bottomRight),
-              ),
-              child: Text("Guardar",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500)),
-              padding: EdgeInsets.only(top: 16, bottom: 16),
-            ))
+        ElevatedButton(
+          child: const Text('Guardar'),
+          onPressed: () {
+            Entry newPennd = save();
+            list.insertEntry(newPennd);
+            Navigator.pushReplacementNamed(context, 'list_entries');
+          },
+        ),
       ],
     );
   }

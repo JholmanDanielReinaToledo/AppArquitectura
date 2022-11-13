@@ -54,7 +54,7 @@ class EntryCategoryFormState extends State<EntryCategoryForm> {
           child: const Text('Guardar'),
           onPressed: () {
             EntryCategory newPennd = save();
-            print(newPennd.name);
+            // ignore: unnecessary_null_comparison
             if (newPennd != null) {
               list.insertCategory(newPennd);
               Navigator.pushReplacementNamed(context, 'list_entry_categories');
@@ -88,11 +88,11 @@ class EntryCategoryFormState extends State<EntryCategoryForm> {
 
   save() {
     if (keyForm.currentState!.validate()) {
-      print("Nombre ${nameCtrl.text}");
-      SpendCategory newSpendCategory = SpendCategory(name: nameCtrl.text!);
+      EntryCategory newSpendCategory = EntryCategory(name: nameCtrl.text);
       keyForm.currentState!.reset();
 
       return newSpendCategory;
     }
+    return null;
   }
 }
