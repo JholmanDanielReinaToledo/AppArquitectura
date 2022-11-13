@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_prquitectura/providers/entries_categories_list.dart';
 import 'package:proyecto_prquitectura/providers/spend_categories_list.dart';
 
-class SpendCategoryForm extends StatefulWidget {
-  const SpendCategoryForm({super.key});
+class EntryCategoryForm extends StatefulWidget {
+  const EntryCategoryForm({super.key});
 
   @override
-  State<SpendCategoryForm> createState() => _SpendCategoryFormState();
+  State<EntryCategoryForm> createState() => EntryCategoryFormState();
 }
 
-class _SpendCategoryFormState extends State<SpendCategoryForm> {
+class EntryCategoryFormState extends State<EntryCategoryForm> {
   GlobalKey<FormState> keyForm = GlobalKey();
 
   TextEditingController nameCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final list = Provider.of<SpendCategoriesListProvider>(context);
+    final list = Provider.of<EntryCategoriesListProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Nuevo categoria de gasto'),
+        title: Text('Nuevo categoria de ingreso'),
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -32,7 +33,7 @@ class _SpendCategoryFormState extends State<SpendCategoryForm> {
     );
   }
 
-  Widget formUI(SpendCategoriesListProvider list) {
+  Widget formUI(EntryCategoriesListProvider list) {
     return Column(
       children: <Widget>[
         SizedBox(
@@ -52,11 +53,11 @@ class _SpendCategoryFormState extends State<SpendCategoryForm> {
         ElevatedButton(
           child: const Text('Guardar'),
           onPressed: () {
-            SpendCategory newPennd = save();
+            EntryCategory newPennd = save();
             print(newPennd.name);
             if (newPennd != null) {
               list.insertCategory(newPennd);
-              Navigator.pushReplacementNamed(context, 'list_spend_categories');
+              Navigator.pushReplacementNamed(context, 'list_entry_categories');
             } else {
               showDialog(
                 context: context,

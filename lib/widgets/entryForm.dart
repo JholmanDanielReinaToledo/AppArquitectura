@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_prquitectura/providers/entries_categories_list.dart';
 import 'package:proyecto_prquitectura/providers/entries_list_provider.dart';
 
 class EntryForm extends StatefulWidget {
@@ -13,28 +14,23 @@ class _EntryFormState extends State<EntryForm> {
   TextEditingController nameCtrl = TextEditingController();
   TextEditingController valorCtrl = TextEditingController();
   TextEditingController passwordCtrl = TextEditingController();
+  late EntryCategoriesListProvider entryCatProvider;
 
   @override
   Widget build(BuildContext context) {
     final list = Provider.of<EntryListProvider>(context);
-
+    setState(() {
+      entryCatProvider = Provider.of<EntryCategoriesListProvider>(context);
+    });
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: Text('Nuevo Ingreso'),
-          actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, 'home');
-              },
-              icon: Icon(Icons.arrow_back_outlined),
-            ),
-          ],
         ),
         body: SingleChildScrollView(
           child: Container(
-            margin: EdgeInsets.all(60.0),
+            margin: EdgeInsets.all(10.0),
             child: Form(
               key: keyForm,
               child: formUI(list),
@@ -45,104 +41,56 @@ class _EntryFormState extends State<EntryForm> {
     );
   }
 
-  formItemsDesign(icon, item) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 7),
-      child: Card(child: ListTile(leading: Icon(icon), title: item)),
-    );
-  }
-
-  String? categoria = '';
+  EntryCategory? categoria;
 
   Widget formUI(EntryListProvider list) {
-    const List<String> listCateg = <String>[
-      "Transporte",
-      "Servicios",
-      "Gustico",
-      "Comida"
-    ];
-
     return Column(
       children: <Widget>[
-        formItemsDesign(
-            Icons.assignment,
-            TextFormField(
-              controller: nameCtrl,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Nombre',
-              ),
-              validator: validateName,
-            )),
-        formItemsDesign(
-            Icons.attach_money,
-            TextFormField(
-              controller: valorCtrl,
-              keyboardType: TextInputType.number,
-              inputFormatters: <TextInputFormatter>[
-                FilteringTextInputFormatter.digitsOnly
-              ],
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Valor',
-              ),
-              validator: validateNumber,
-            )),
-        formItemsDesign(
-            Icons.abc,
-            Column(children: <Widget>[
-              Text("Categoria"),
-
-              // RadioListTile<String>(
-              //   title: Text('Comida'),
-              //   value: 'Comida',
-              //   groupValue: categoria,
-              //   onChanged: (value) {
-              //     setState(() {
-              //       categoria = value;
-              //     });
-              //   },
-              // ),
-              // RadioListTile<String>(
-              //   title: const Text('Transporte'),
-              //   value: 'Transporte',
-              //   groupValue: categoria,
-              //   onChanged: (value) {
-              //     setState(() {
-              //       categoria = value;
-              //     });
-              //   },
-              // ),
-              // RadioListTile<String>(
-              //   title: const Text('Otros'),
-              //   value: 'Otros',
-              //   groupValue: categoria,
-              //   onChanged: (value) {
-              //     setState(() {
-              //       categoria = value;
-              //     });
-              //   },
-              // )
-
-              DropdownButton<String>(
-                icon: const Icon(Icons.arrow_downward),
-                style: const TextStyle(
-                    color: Color(0xFF03A0FE),
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold),
-                items: listCateg.map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  setState(() {
-                    categoria = value;
-                  });
-                },
-              ),
-            ])),
+        Container(
+          padding: const EdgeInsets.all(10),
+          child: TextFormField(
+            validator: validateName,
+            controller: nameCtrl,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Nombre',
+            ),
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.all(10),
+          child: TextFormField(
+            controller: valorCtrl,
+            keyboardType: TextInputType.number,
+            inputFormatters: <TextInputFormatter>[
+              FilteringTextInputFormatter.digitsOnly
+            ],
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Valor',
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 7),
+          child: ListTile(
+            title: DropdownButtonFormField<EntryCategory>(
+              value: categoria,
+              items: entryCatProvider.categories
+                  .map<DropdownMenuItem<EntryCategory>>((e) {
+                return DropdownMenuItem<EntryCategory>(
+                  child: Text(e.name),
+                  value: e,
+                );
+              }).toList(),
+              onChanged: (EntryCategory? newValue) {
+                setState(() {
+                  categoria = newValue;
+                });
+              },
+            ),
+          ),
+        ),
         GestureDetector(
             onTap: () {
               Entry newPennd = save();
@@ -225,7 +173,7 @@ class _EntryFormState extends State<EntryForm> {
       print("Categoria $categoria");
       keyForm.currentState!.reset();
       Entry newEntry = new Entry();
-      newEntry.category = categoria!;
+      newEntry.category = categoria?.name ?? '';
       print(valorCtrl.text.runtimeType);
       print(valorCtrl.text);
       newEntry.value = int.parse(valorCtrl.text.trim());

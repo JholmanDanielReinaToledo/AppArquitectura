@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_prquitectura/providers/spent_list_provider.dart';
@@ -12,12 +11,9 @@ class ListSpents extends StatelessWidget {
     final list = Provider.of<SpentListProvider>(context);
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('Listado de gastos'),
-        leading: MaterialButton(
-          child: Icon(Icons.arrow_left_rounded, color: Colors.white),
-          onPressed: () => Navigator.pushReplacementNamed(context, 'home'),
-        ),
       ),
       body: MediaQuery.removePadding(
         context: context,

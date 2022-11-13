@@ -1,19 +1,18 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:proyecto_prquitectura/providers/spend_categories_list.dart';
+import 'package:proyecto_prquitectura/providers/entries_categories_list.dart';
 import 'package:proyecto_prquitectura/widgets/card.dart';
 
-class ListSpendCategories extends StatelessWidget {
-  const ListSpendCategories({super.key});
+class ListEntryCategories extends StatelessWidget {
+  const ListEntryCategories({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final list = Provider.of<SpendCategoriesListProvider>(context);
+    final list = Provider.of<EntryCategoriesListProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Listado de categorias de los gastos'),
+        title: Text('Listado de categorias de los ingresos'),
         leading: MaterialButton(
           child: Icon(Icons.arrow_left_rounded, color: Colors.white),
           onPressed: () => Navigator.pushReplacementNamed(context, 'home'),
@@ -24,7 +23,7 @@ class ListSpendCategories extends StatelessWidget {
         child: ListView.builder(
           itemCount: list.categories.length,
           itemBuilder: (BuildContext context, int index) {
-            SpendCategory spend = list.categories[index];
+            EntryCategory spend = list.categories[index];
             return card(
               spend!.name,
               "",

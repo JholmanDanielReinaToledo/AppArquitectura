@@ -52,101 +52,78 @@ class _SpendFormState extends State<SpendForm> {
     );
   }
 
-  formItemsDesign(icon, item) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 7),
-      child: Card(child: ListTile(leading: Icon(icon), title: item)),
-    );
-  }
-
   Widget formUI(SpentListProvider list) {
     print(spendCatProvider.categories.toString());
     return Column(
       children: <Widget>[
-        formItemsDesign(
-          Icons.assignment,
-          TextFormField(
+        Container(
+          padding: const EdgeInsets.all(10),
+          child: TextFormField(
+            validator: validateName,
             controller: nameCtrl,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
               labelText: 'Nombre',
             ),
-            validator: validateName,
           ),
         ),
-        formItemsDesign(
-          Icons.attach_money,
-          TextFormField(
+        Container(
+          padding: const EdgeInsets.all(10),
+          child: TextFormField(
+            validator: validateValue,
             controller: valorCtrl,
             keyboardType: TextInputType.number,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
               labelText: 'Valor',
             ),
-            validator: validateValue,
           ),
         ),
         Padding(
           padding: EdgeInsets.symmetric(vertical: 7),
-          child: Card(
-            child: ListTile(
-              title: DropdownButtonFormField<SpendCategory>(
-                value: categoria,
-                items: spendCatProvider.categories
-                    .map<DropdownMenuItem<SpendCategory>>((e) {
-                  return DropdownMenuItem<SpendCategory>(
-                    child: Text(e.name),
-                    value: e,
-                  );
-                }).toList(),
-                onChanged: (SpendCategory? newValue) {
-                  setState(() {
-                    categoria = newValue;
-                  });
-                },
-              ),
+          child: ListTile(
+            title: DropdownButtonFormField<SpendCategory>(
+              value: categoria,
+              items: spendCatProvider.categories
+                  .map<DropdownMenuItem<SpendCategory>>((e) {
+                return DropdownMenuItem<SpendCategory>(
+                  child: Text(e.name),
+                  value: e,
+                );
+              }).toList(),
+              onChanged: (SpendCategory? newValue) {
+                setState(() {
+                  categoria = newValue;
+                });
+              },
             ),
           ),
         ),
-        GestureDetector(
-            onTap: () {
-              Spent newPennd = save();
+        ElevatedButton(
+          child: const Text('Guardar'),
+          onPressed: () {
+            Spent newPennd = save();
 
-              if (newPennd != null) {
-                list.insertSpend(newPennd);
-                Navigator.pushReplacementNamed(context, 'list_spents');
-              } else {
-                showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: Text("Error"),
-                    content: Text("Ha ocurrido un error"),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(context),
-                        child: Text('Ok'),
-                      ),
-                    ],
-                  ),
-                );
-              }
-            },
-            child: Container(
-              margin: EdgeInsets.all(30.0),
-              alignment: Alignment.center,
-              decoration: ShapeDecoration(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0)),
-                gradient: LinearGradient(colors: [
-                  Color(0xFF0EDED2),
-                  Color(0xFF03A0FE),
-                ], begin: Alignment.topLeft, end: Alignment.bottomRight),
-              ),
-              child: Text("Guardar",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500)),
-              padding: EdgeInsets.only(top: 16, bottom: 16),
-            ))
+            if (newPennd != null) {
+              list.insertSpend(newPennd);
+              Navigator.pushReplacementNamed(context, 'list_spents');
+            } else {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text("Error"),
+                  content: Text("Ha ocurrido un error"),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: Text('Ok'),
+                    ),
+                  ],
+                ),
+              );
+            }
+          },
+        ),
       ],
     );
   }

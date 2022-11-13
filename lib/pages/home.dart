@@ -25,24 +25,39 @@ class Home extends StatelessWidget {
         footer: Footer(
           backgroundColor: Colors.blue,
           padding: EdgeInsets.all(5),
-          child: Text('Total ingresos ${entriesProvider.total.toString()}'),
+          child: Center(
+            child: Text(
+              'Total ingresos ${entriesProvider.total.toString()}',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+              ),
+            ),
+          ),
         ),
         children: <Widget>[
-          SfCircularChart(series: <CircularSeries>[
-            // Render pie chart
-            PieSeries<ChartData, String>(
+          SfCircularChart(
+            series: <CircularSeries>[
+              // Render pie chart
+              PieSeries<ChartData, String>(
                 dataSource: [
                   ChartData(
-                      'Gastos', spendsProvider.total.toDouble(), Colors.green),
+                    'Gastos',
+                    spendsProvider.total.toDouble(),
+                    Colors.green,
+                  ),
                   ChartData(
-                      'Steve',
-                      (entriesProvider.total - spendsProvider.total).toDouble(),
-                      Colors.blue),
+                    'Ingresos disponibles',
+                    (entriesProvider.total - spendsProvider.total).toDouble(),
+                    Colors.blue,
+                  ),
                 ],
                 pointColorMapper: (ChartData data, _) => data.color,
                 xValueMapper: (ChartData data, _) => data.x,
-                yValueMapper: (ChartData data, _) => data.y)
-          ]),
+                yValueMapper: (ChartData data, _) => data.y,
+              )
+            ],
+          ),
           Center(
             child: Text(
               'Total ingresos ${entriesProvider.total.toString()}',

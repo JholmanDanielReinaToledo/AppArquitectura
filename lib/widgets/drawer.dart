@@ -10,6 +10,9 @@ class DrawerPropio extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
+          SizedBox(
+            height: 20,
+          ),
           ListTile(
             title: const Text('Ver gastos'),
             onTap: () {
@@ -29,9 +32,21 @@ class DrawerPropio extends StatelessWidget {
             },
           ),
           ListTile(
+            title: const Text('Nuevo ingreso'),
+            onTap: () {
+              Navigator.pushNamed(context, 'new_entry');
+            },
+          ),
+          ListTile(
             title: const Text('Nuevo categoria de gasto'),
             onTap: () {
               Navigator.pushNamed(context, 'new_spend_category');
+            },
+          ),
+          ListTile(
+            title: const Text('Nuevo categoria de ingreso'),
+            onTap: () {
+              Navigator.pushNamed(context, 'new_entry_category');
             },
           ),
           ListTile(
@@ -41,21 +56,9 @@ class DrawerPropio extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text('Nuevo ingreso'),
-            onTap: () {
-              Navigator.pushNamed(context, 'new_entry');
-            },
-          ),
-          ListTile(
             title: const Text('Lista de categorias de los ingresos'),
             onTap: () {
-              Navigator.pushNamed(context, 'list_spend_categories');
-            },
-          ),
-          ListTile(
-            title: const Text('Nuevo categoria de ingreso'),
-            onTap: () {
-              Navigator.pushNamed(context, 'new_entry');
+              Navigator.pushNamed(context, 'list_entry_categories');
             },
           ),
         ],

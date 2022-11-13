@@ -11,16 +11,9 @@ class ListEntries extends StatelessWidget {
     final list = Provider.of<EntryListProvider>(context);
     print(list.entries);
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('Ingresos'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, 'home');
-            },
-            icon: Icon(Icons.arrow_back_outlined),
-          ),
-        ],
       ),
       body: MediaQuery.removePadding(
         context: context,

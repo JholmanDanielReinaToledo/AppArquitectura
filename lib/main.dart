@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:proyecto_prquitectura/pages/home.dart';
-import 'package:proyecto_prquitectura/pages/list_entries_page.dart';
+import 'package:proyecto_prquitectura/pages/list_entry_category.dart';
 import 'package:proyecto_prquitectura/pages/list_spend_category.dart';
-import 'package:proyecto_prquitectura/pages/list_spents_page.dart';
+import 'package:proyecto_prquitectura/pages/new_entry_cagetory.dart';
 import 'package:proyecto_prquitectura/pages/new_spend_cagetory.dart';
-import 'package:proyecto_prquitectura/pages/new_spent_page.dart';
+import 'package:proyecto_prquitectura/providers/entries_categories_list.dart';
 import 'package:proyecto_prquitectura/providers/spend_categories_list.dart';
-import 'package:proyecto_prquitectura/providers/spend_form_provider.dart';
 import 'package:proyecto_prquitectura/pages/pages.dart';
 import 'package:proyecto_prquitectura/providers/entries_list_provider.dart';
 import 'package:proyecto_prquitectura/providers/spent_list_provider.dart';
@@ -38,6 +36,9 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => EntryListProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => EntryCategoriesListProvider(),
+        ),
       ],
       child: MyApp(),
     );
@@ -62,7 +63,9 @@ class MyApp extends StatelessWidget {
         'new_spent': (_) => SpendForm(),
         'test': (_) => SpendForm(),
         'list_spend_categories': (_) => ListSpendCategories(),
+        'list_entry_categories': (_) => ListEntryCategories(),
         'new_spend_category': (_) => SpendCategoryForm(),
+        'new_entry_category': (_) => EntryCategoryForm(),
         'new_entry': (_) => EntryForm(),
       },
       theme: ThemeData.light().copyWith(scaffoldBackgroundColor: Colors.grey),
