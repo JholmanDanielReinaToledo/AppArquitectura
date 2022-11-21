@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_prquitectura/services/auth_service.dart';
 
 class DrawerPropio extends StatelessWidget {
   const DrawerPropio({super.key});
@@ -58,6 +59,15 @@ class DrawerPropio extends StatelessWidget {
             title: const Text('Lista de categorias de los ingresos'),
             onTap: () {
               Navigator.pushNamed(context, 'list_entry_categories');
+            },
+          ),
+          ListTile(
+            title: const Text(
+              'Cerrar sesión',
+              style: TextStyle(color: Colors.red),
+            ),
+            onTap: () {
+              AuthService().signOut();
             },
           ),
         ],
