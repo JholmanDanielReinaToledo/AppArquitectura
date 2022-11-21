@@ -35,7 +35,7 @@ class _LoginFormState extends State<LoginForm> {
       child: ListView(
         children: <Widget>[
           SizedBox(
-            height: 40,
+            height: 200,
           ),
           Container(
             alignment: Alignment.center,
@@ -48,76 +48,24 @@ class _LoginFormState extends State<LoginForm> {
                   fontSize: 30),
             ),
           ),
-          Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.all(10),
-            child: const Text(
-              'Iniciar Sesión',
-              style: TextStyle(fontSize: 20),
-            ),
+          SizedBox(
+            height: 40,
           ),
-          Container(
-            padding: const EdgeInsets.all(10),
-            child: TextFormField(
-              validator: validateEmail,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Correo',
-              ),
-            ),
+          Center(
+            child: Text("Ten el control de tu dinero!!"),
           ),
-          Container(
-            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-            child: TextFormField(
-              obscureText: true,
-              validator: (value) {
-                if (value != null && value.length >= 8) {
-                  return null;
-                }
-                return 'La contraseña debe contener minimo 8 caracteristicas';
-              },
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Contraseña',
-              ),
-            ),
-          ),
-          TextButton(
-            onPressed: () {},
-            child: const Text(
-              'Olvidaste tu contraseña',
-            ),
+          SizedBox(
+            height: 40,
           ),
           Container(
             height: 50,
             padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
             child: ElevatedButton(
-              child: const Text('Login'),
+              child: const Text("Inicia con Google !!"),
               onPressed: () {
-                Navigator.pushReplacementNamed(context, 'home');
+                AuthService().singInWithGoogle();
               },
             ),
-          ),
-          Row(
-            children: <Widget>[
-              const Text('No tienes una cuenta?'),
-              TextButton(
-                child: const Text(
-                  'Registrarse',
-                  style: TextStyle(fontSize: 20),
-                ),
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, 'register');
-                },
-              )
-            ],
-            mainAxisAlignment: MainAxisAlignment.center,
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              AuthService().singInWithGoogle();
-            },
-            child: Text("Inicia con Google !!"),
           ),
         ],
       ),
