@@ -1,29 +1,46 @@
-import 'dart:convert';
+import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:proyecto_prquitectura/pages/home.dart';
+import 'package:proyecto_prquitectura/pages/login_page.dart';
 
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+class AuthService {
+  handleAuthState() {
+    print("su madre");
+    return StreamBuilder(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (BuildContext context, snapshot) {
+        print("asd");
+        if (snapshot.hasData) {
+          return Home();
+        } else {
+          return LoginPage();
+        }
+      },
+    );
+  }
 
-class AuthService extends ChangeNotifier {
-  final String _baseUrl = 'identitytoolkit.googleapis.com';
-  final String _firebaseToken = 'AIzaSyDtgv9-MX5kVBsX_ei2awmhKvnjftVqrgw';
+  singInWithGoogle() async {
+    if (FirebaseAuth.instance.currentUser == null) {
+      final GoogleSignInAccount? googleUser =
+          await GoogleSignIn(scopes: <String>['email']).signIn();
 
-  Future<String?> createUser(String email, String password) async {
-    final Map<String, String> authData = {
-      'email': email,
-      'password': password,
-    };
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser!.authentication;
 
-    final url =
-        Uri.https(_baseUrl, '/v1/accounts:signUp', {'key': _firebaseToken});
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
 
-    final res = await http.post(url, body: json.encode(authData));
-    final Map<String, dynamic> decodeResp = json.decode(res.body);
-
-    if (decodeResp.containsKey('idToken')) {
-      // guardamos el token
-      return null;
+      return await FirebaseAuth.instance.signInWithCredential(credential);
     } else {
-      return decodeResp['error']['message'];
+      print(FirebaseAuth.instance.currentUser);
+      return FirebaseAuth.instance.currentUser;
     }
+  }
+
+  signOut() {
+    FirebaseAuth.instance.signOut();
   }
 }

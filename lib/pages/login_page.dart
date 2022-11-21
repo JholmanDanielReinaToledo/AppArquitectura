@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_prquitectura/services/auth.dart';
+import 'package:proyecto_prquitectura/services/auth_service.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -114,7 +115,7 @@ class _LoginFormState extends State<LoginForm> {
           ),
           ElevatedButton(
             onPressed: () async {
-              // await authService.googleSignIn();
+              AuthService().singInWithGoogle();
             },
             child: Text("Inicia con Google !!"),
           ),

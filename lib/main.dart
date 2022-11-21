@@ -13,9 +13,11 @@ import 'package:proyecto_prquitectura/services/auth.dart';
 import 'package:proyecto_prquitectura/services/auth_service.dart';
 import 'package:proyecto_prquitectura/widgets/entryForm.dart';
 import 'package:proyecto_prquitectura/widgets/test.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
 
   runApp(const App());
 }
@@ -32,9 +34,6 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => AuthService(),
-        ),
         ChangeNotifierProvider(
           create: (_) => SpentListProvider(),
         ),
@@ -62,7 +61,7 @@ class MyApp extends StatelessWidget {
       title: 'Titulo',
       debugShowCheckedModeBanner: false,
       initialRoute: 'login',
-      home: LoginPage(),
+      home: AuthService().handleAuthState(),
       routes: {
         'login': (_) => LoginPage(),
         'register': (_) => RegisterPage(),
