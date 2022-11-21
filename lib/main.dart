@@ -60,7 +60,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Titulo',
       debugShowCheckedModeBanner: false,
-      initialRoute: 'login',
       home: AuthService().handleAuthState(),
       routes: {
         'login': (_) => LoginPage(),

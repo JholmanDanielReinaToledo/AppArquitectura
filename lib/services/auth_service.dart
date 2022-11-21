@@ -6,7 +6,6 @@ import 'package:proyecto_prquitectura/pages/login_page.dart';
 
 class AuthService {
   handleAuthState() {
-    print("su madre");
     return StreamBuilder(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (BuildContext context, snapshot) {
