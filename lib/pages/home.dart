@@ -4,6 +4,7 @@ import 'package:footer/footer_view.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_prquitectura/providers/entries_list_provider.dart';
 import 'package:proyecto_prquitectura/providers/spent_list_provider.dart';
+import 'package:proyecto_prquitectura/services/auth.dart';
 import 'package:proyecto_prquitectura/widgets/drawer.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -12,6 +13,9 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final authService = Provider.of<AuthService2>(context);
+    // print(authService.user.displayName);
+
     final entriesProvider = Provider.of<EntryListProvider>(context);
     final spendsProvider = Provider.of<SpentListProvider>(context);
 

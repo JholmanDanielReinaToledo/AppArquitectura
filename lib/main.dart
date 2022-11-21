@@ -9,17 +9,25 @@ import 'package:proyecto_prquitectura/providers/spend_categories_list.dart';
 import 'package:proyecto_prquitectura/pages/pages.dart';
 import 'package:proyecto_prquitectura/providers/entries_list_provider.dart';
 import 'package:proyecto_prquitectura/providers/spent_list_provider.dart';
+import 'package:proyecto_prquitectura/services/auth.dart';
 import 'package:proyecto_prquitectura/services/auth_service.dart';
 import 'package:proyecto_prquitectura/widgets/entryForm.dart';
 import 'package:proyecto_prquitectura/widgets/test.dart';
 
-void main() {
-  runApp(const AppState());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  runApp(const App());
 }
 
-class AppState extends StatelessWidget {
-  const AppState({super.key});
+class App extends StatefulWidget {
+  const App({super.key});
 
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -54,6 +62,7 @@ class MyApp extends StatelessWidget {
       title: 'Titulo',
       debugShowCheckedModeBanner: false,
       initialRoute: 'login',
+      home: LoginPage(),
       routes: {
         'login': (_) => LoginPage(),
         'register': (_) => RegisterPage(),

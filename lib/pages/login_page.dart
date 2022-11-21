@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:proyecto_prquitectura/services/auth.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -26,6 +28,7 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
+    // final authService = Provider.of<AuthService2>(context);
     return Form(
       autovalidateMode: AutovalidateMode.onUserInteraction,
       child: ListView(
@@ -108,6 +111,12 @@ class _LoginFormState extends State<LoginForm> {
               )
             ],
             mainAxisAlignment: MainAxisAlignment.center,
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              // await authService.googleSignIn();
+            },
+            child: Text("Inicia con Google !!"),
           ),
         ],
       ),
