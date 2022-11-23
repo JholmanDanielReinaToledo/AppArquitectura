@@ -13,6 +13,13 @@ class ListSpents extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Config.blue,
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.pushNamed(context, 'new_spent');
+        },
+      ),
       appBar: AppBar(
         title: Text('Listado de gastos'),
         backgroundColor: Config.blue,
@@ -27,7 +34,7 @@ class ListSpents extends StatelessWidget {
               spend!.name,
               spend!.category,
               "${spend.value}",
-              () => print(index),
+              spend.date,
             );
           },
         ),

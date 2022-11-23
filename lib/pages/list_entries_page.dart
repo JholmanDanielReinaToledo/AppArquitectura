@@ -12,6 +12,13 @@ class ListEntries extends StatelessWidget {
     final list = Provider.of<EntryListProvider>(context);
     print(list.entries);
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Config.blue,
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.pushNamed(context, 'new_entry');
+        },
+      ),
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('Ingresos'),
@@ -27,7 +34,7 @@ class ListEntries extends StatelessWidget {
               spend.name,
               spend.category,
               "${spend.value}",
-              () => print(index),
+              spend.date,
             );
           },
         ),

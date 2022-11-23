@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter/material.dart';
 import 'package:footer/footer.dart';
 import 'package:footer/footer_view.dart';
@@ -62,6 +63,30 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: Colors.white,
       drawer: DrawerPropio(),
+      floatingActionButton: SpeedDial(
+        backgroundColor: Config.blue,
+        icon: Icons.arrow_circle_up,
+        children: [
+          SpeedDialChild(
+            child: Icon(Icons.add),
+            backgroundColor: Config.blueOpaco,
+            foregroundColor: Colors.white,
+            label: 'Nuevo gasto',
+            onTap: () {
+              Navigator.pushNamed(context, 'new_spent');
+            },
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.add),
+            backgroundColor: Config.blueOpaco,
+            foregroundColor: Colors.white,
+            label: 'Nuevo ingreso',
+            onTap: () {
+              Navigator.pushNamed(context, 'new_entry');
+            },
+          ),
+        ],
+      ),
       appBar: AppBar(
         backgroundColor: Config.blue,
         title: Text('FinTech'),

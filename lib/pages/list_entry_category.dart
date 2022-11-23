@@ -10,6 +10,13 @@ class ListEntryCategories extends StatelessWidget {
   Widget build(BuildContext context) {
     final list = Provider.of<EntryCategoriesListProvider>(context);
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Config.blue,
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.pushNamed(context, 'new_entry_category');
+        },
+      ),
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Config.blue,

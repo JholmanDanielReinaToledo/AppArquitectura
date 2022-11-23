@@ -62,49 +62,25 @@ class DrawerPropio extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: const Text('Ver gastos'),
+            title: const Text('Gastos'),
             onTap: () {
               Navigator.pushNamed(context, 'list_spents');
             },
           ),
           ListTile(
-            title: const Text('Ver ingresos'),
+            title: const Text('Ingresos'),
             onTap: () {
               Navigator.pushNamed(context, 'list_entries');
             },
           ),
           ListTile(
-            title: const Text('Nuevo gasto'),
-            onTap: () {
-              Navigator.pushNamed(context, 'new_spent');
-            },
-          ),
-          ListTile(
-            title: const Text('Nuevo ingreso'),
-            onTap: () {
-              Navigator.pushNamed(context, 'new_entry');
-            },
-          ),
-          ListTile(
-            title: const Text('Nuevo categoria de gasto'),
-            onTap: () {
-              Navigator.pushNamed(context, 'new_spend_category');
-            },
-          ),
-          ListTile(
-            title: const Text('Nuevo categoria de ingreso'),
-            onTap: () {
-              Navigator.pushNamed(context, 'new_entry_category');
-            },
-          ),
-          ListTile(
-            title: const Text('Lista de categorias de los gastos'),
+            title: const Text('Categorias de los gastos'),
             onTap: () {
               Navigator.pushNamed(context, 'list_spend_categories');
             },
           ),
           ListTile(
-            title: const Text('Lista de categorias de los ingresos'),
+            title: const Text('Categorias de los ingresos'),
             onTap: () {
               Navigator.pushNamed(context, 'list_entry_categories');
             },

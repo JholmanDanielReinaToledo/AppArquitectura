@@ -10,6 +10,13 @@ class ListSpendCategories extends StatelessWidget {
   Widget build(BuildContext context) {
     final list = Provider.of<SpendCategoriesListProvider>(context);
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Config.blue,
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.pushNamed(context, 'new_spend_category');
+        },
+      ),
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Config.blue,
