@@ -92,6 +92,9 @@ class _EntryFormState extends State<EntryForm> {
           ),
         ),
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Config.blue,
+          ),
           child: const Text('Guardar'),
           onPressed: () {
             Entry newPennd = save();

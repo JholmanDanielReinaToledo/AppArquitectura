@@ -52,6 +52,9 @@ class _SpendCategoryFormState extends State<SpendCategoryForm> {
           ),
         ),
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Config.blue,
+          ),
           child: const Text('Guardar'),
           onPressed: () {
             SpendCategory newPennd = save();

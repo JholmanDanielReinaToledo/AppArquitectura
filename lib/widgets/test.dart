@@ -101,6 +101,9 @@ class _SpendFormState extends State<SpendForm> {
           ),
         ),
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Config.blue,
+          ),
           child: const Text('Guardar'),
           onPressed: () {
             Spent newPennd = save();

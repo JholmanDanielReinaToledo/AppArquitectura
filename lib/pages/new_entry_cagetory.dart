@@ -53,6 +53,9 @@ class EntryCategoryFormState extends State<EntryCategoryForm> {
           ),
         ),
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Config.blue,
+          ),
           child: const Text('Guardar'),
           onPressed: () {
             EntryCategory newPennd = save();
