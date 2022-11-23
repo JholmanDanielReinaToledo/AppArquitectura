@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_prquitectura/common/Config.dart';
 import 'package:proyecto_prquitectura/providers/entries_categories_list.dart';
-import 'package:proyecto_prquitectura/widgets/card.dart';
 
 class ListEntryCategories extends StatelessWidget {
   const ListEntryCategories({super.key});
@@ -14,26 +13,16 @@ class ListEntryCategories extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Config.blue,
-        title: Text('Listado de categorias de los ingresos'),
-        leading: MaterialButton(
-          child: Icon(Icons.arrow_left_rounded, color: Colors.white),
-          onPressed: () => Navigator.pushReplacementNamed(context, 'home'),
-        ),
+        title: Text('Categorias de los ingresos'),
       ),
-      body: MediaQuery.removePadding(
-        context: context,
-        child: ListView.builder(
-          itemCount: list.categories.length,
-          itemBuilder: (BuildContext context, int index) {
-            EntryCategory spend = list.categories[index];
-            return card(
-              spend!.name,
-              "",
-              "",
-              () => print(index),
-            );
-          },
-        ),
+      body: ListView.builder(
+        itemCount: list.categories.length,
+        itemBuilder: (BuildContext context, int index) {
+          EntryCategory spend = list.categories[index];
+          return ListTile(
+            title: Text(spend!.name),
+          );
+        },
       ),
     );
   }
