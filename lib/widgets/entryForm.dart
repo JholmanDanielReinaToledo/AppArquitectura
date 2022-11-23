@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_prquitectura/common/Config.dart';
 import 'package:proyecto_prquitectura/providers/entries_categories_list.dart';
 import 'package:proyecto_prquitectura/providers/entries_list_provider.dart';
 
@@ -22,19 +23,18 @@ class _EntryFormState extends State<EntryForm> {
     setState(() {
       entryCatProvider = Provider.of<EntryCategoriesListProvider>(context);
     });
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Nuevo Ingreso'),
-        ),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.all(10.0),
-            child: Form(
-              key: keyForm,
-              child: formUI(list),
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Nuevo Ingreso'),
+        backgroundColor: Config.blue,
+      ),
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.all(10.0),
+          child: Form(
+            key: keyForm,
+            child: formUI(list),
           ),
         ),
       ),

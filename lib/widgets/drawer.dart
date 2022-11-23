@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:proyecto_prquitectura/common/Config.dart';
 import 'package:proyecto_prquitectura/services/auth_service.dart';
 
 class DrawerPropio extends StatelessWidget {
@@ -13,7 +14,7 @@ class DrawerPropio extends StatelessWidget {
         children: [
           DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Config.blue,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

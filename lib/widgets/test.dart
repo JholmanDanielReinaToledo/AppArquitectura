@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_prquitectura/common/Config.dart';
 import 'package:proyecto_prquitectura/providers/entries_list_provider.dart';
 import 'package:proyecto_prquitectura/providers/spend_categories_list.dart';
 import 'package:proyecto_prquitectura/providers/spent_list_provider.dart';
@@ -33,19 +34,18 @@ class _SpendFormState extends State<SpendForm> {
       entryProvider = Provider.of<EntryListProvider>(context);
       spendCatProvider = Provider.of<SpendCategoriesListProvider>(context);
     });
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Nuevo gasto'),
-        ),
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.all(10.0),
-            child: Form(
-              autovalidateMode: AutovalidateMode.always,
-              key: keyForm,
-              child: formUI(spendProvider),
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Nuevo gasto'),
+        backgroundColor: Config.blue,
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.all(10.0),
+          child: Form(
+            autovalidateMode: AutovalidateMode.always,
+            key: keyForm,
+            child: formUI(spendProvider),
           ),
         ),
       ),

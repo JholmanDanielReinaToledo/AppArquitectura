@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_prquitectura/common/Config.dart';
 import 'package:proyecto_prquitectura/providers/spend_categories_list.dart';
 
 class SpendCategoryForm extends StatefulWidget {
@@ -21,6 +22,7 @@ class _SpendCategoryFormState extends State<SpendCategoryForm> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('Nuevo categoria de gasto'),
+        backgroundColor: Config.blue,
       ),
       body: SingleChildScrollView(
         child: Form(

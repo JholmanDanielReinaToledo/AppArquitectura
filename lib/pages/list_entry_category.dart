@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_prquitectura/common/Config.dart';
 import 'package:proyecto_prquitectura/providers/entries_categories_list.dart';
 import 'package:proyecto_prquitectura/widgets/card.dart';
 
@@ -12,6 +13,7 @@ class ListEntryCategories extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Config.blue,
         title: Text('Listado de categorias de los ingresos'),
         leading: MaterialButton(
           child: Icon(Icons.arrow_left_rounded, color: Colors.white),

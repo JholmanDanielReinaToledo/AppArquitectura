@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_prquitectura/common/Config.dart';
 import 'package:proyecto_prquitectura/services/auth.dart';
 import 'package:proyecto_prquitectura/services/auth_service.dart';
 
@@ -40,10 +41,10 @@ class _LoginFormState extends State<LoginForm> {
           Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.all(10),
-            child: const Text(
+            child: Text(
               'FinTech',
               style: TextStyle(
-                  color: Colors.blue,
+                  color: Config.blue,
                   fontWeight: FontWeight.w500,
                   fontSize: 30),
             ),
@@ -65,6 +66,13 @@ class _LoginFormState extends State<LoginForm> {
               onPressed: () {
                 AuthService().singInWithGoogle();
               },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Config.blue,
+                textStyle: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
         ],

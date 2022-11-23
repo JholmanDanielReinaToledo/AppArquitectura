@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:footer/footer.dart';
 import 'package:footer/footer_view.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_prquitectura/common/Config.dart';
 import 'package:proyecto_prquitectura/providers/login_form_provider.dart';
 import 'package:proyecto_prquitectura/providers/spend_form_provider.dart';
 import 'package:proyecto_prquitectura/providers/spent_list_provider.dart';
@@ -18,6 +19,7 @@ class NewEntryPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('FinTech'),
+        backgroundColor: Config.blue,
       ),
       body:
           //FooterView(

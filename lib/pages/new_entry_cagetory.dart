@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_prquitectura/common/Config.dart';
 import 'package:proyecto_prquitectura/providers/entries_categories_list.dart';
 import 'package:proyecto_prquitectura/providers/spend_categories_list.dart';
 
@@ -22,6 +23,7 @@ class EntryCategoryFormState extends State<EntryCategoryForm> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('Nuevo categoria de ingreso'),
+        backgroundColor: Config.blue,
       ),
       body: SingleChildScrollView(
         child: Form(
