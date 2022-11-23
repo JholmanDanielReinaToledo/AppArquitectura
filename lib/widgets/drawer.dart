@@ -19,16 +19,26 @@ class DrawerPropio extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.all(10),
-                  child: const Text(
-                    'FinTech',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 30),
-                  ),
+                Row(
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.all(10),
+                      child: const Text(
+                        'FinTech',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 30),
+                      ),
+                    ),
+                    CircleAvatar(
+                      radius: 25,
+                      backgroundImage: NetworkImage(
+                          FirebaseAuth.instance.currentUser!.photoURL ?? ''),
+                      backgroundColor: Colors.transparent,
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 10,
