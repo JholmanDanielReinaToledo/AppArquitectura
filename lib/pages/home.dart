@@ -27,11 +27,11 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    super.initState();
     setState(() {
       fechaInicial = DateTime.now().subtract(Duration(days: 500000));
       controller.selectIndex(4);
     });
+    super.initState();
   }
 
   @override
@@ -59,6 +59,44 @@ class _HomeState extends State<Home> {
         totalSalidas = totalSalidas + spent.value;
       }
     }
+
+    List<ChartData2> gastos2 = [];
+    Map<String, double> gastos = {};
+
+    for (Spent spe in salidas) {
+      if (gastos.containsKey(spe.category)) {
+        gastos[spe.category] = gastos[spe.category]! + spe.value.toDouble();
+      } else {
+        gastos[spe.category] = spe.value.toDouble();
+      }
+    }
+    double maximoGastos = 0;
+    gastos.forEach((key, value) {
+      if (value > maximoGastos) {
+        maximoGastos = value;
+      }
+      gastos2.add(ChartData2(key, value));
+    });
+
+    Map<String, double> ingresos = {};
+    List<ChartData2> ingresos2 = [];
+
+    for (Entry entr in entradas) {
+      if (ingresos.containsKey(entr.category)) {
+        ingresos[entr.category] =
+            ingresos[entr.category]! + entr.value.toDouble();
+      } else {
+        ingresos[entr.category] = entr.value.toDouble();
+      }
+    }
+
+    double maximoIngresos = 0;
+    ingresos.forEach((key, value) {
+      if (value > maximoIngresos) {
+        maximoIngresos = value;
+      }
+      ingresos2.add(ChartData2(key, value));
+    });
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -212,6 +250,44 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
+                SizedBox(
+                  height: 40,
+                ),
+                Text("Gastos"),
+                SfCartesianChart(
+                  primaryXAxis: CategoryAxis(),
+                  primaryYAxis: NumericAxis(
+                      minimum: 0,
+                      maximum: maximoGastos,
+                      interval: maximoGastos / 4),
+                  series: <ChartSeries<ChartData2, String>>[
+                    ColumnSeries<ChartData2, String>(
+                        dataSource: gastos2,
+                        xValueMapper: (ChartData2 data, _) => data.x,
+                        yValueMapper: (ChartData2 data, _) => data.y,
+                        name: 'Gold',
+                        color: Color.fromRGBO(8, 142, 255, 1))
+                  ],
+                ),
+                SizedBox(
+                  height: 40,
+                ),
+                Text("Ingresos"),
+                SfCartesianChart(
+                  primaryXAxis: CategoryAxis(),
+                  primaryYAxis: NumericAxis(
+                      minimum: 0,
+                      maximum: maximoIngresos,
+                      interval: maximoIngresos / 4),
+                  series: <ChartSeries<ChartData2, String>>[
+                    ColumnSeries<ChartData2, String>(
+                        dataSource: ingresos2,
+                        xValueMapper: (ChartData2 data, _) => data.x,
+                        yValueMapper: (ChartData2 data, _) => data.y,
+                        name: 'Gold',
+                        color: Color.fromRGBO(8, 142, 255, 1))
+                  ],
+                ),
               ],
             ),
           ),
@@ -227,4 +303,11 @@ class ChartData {
   final Color color;
 
   ChartData(this.x, this.y, this.color);
+}
+
+class ChartData2 {
+  ChartData2(this.x, this.y);
+
+  final String x;
+  final double y;
 }
