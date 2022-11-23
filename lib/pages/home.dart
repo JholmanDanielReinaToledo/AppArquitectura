@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:footer/footer.dart';
 import 'package:footer/footer_view.dart';
@@ -27,8 +28,8 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     setState(() {
-      fechaInicial = DateTime.now().subtract(Duration(days: 7));
-      controller.selectIndex(1);
+      fechaInicial = DateTime.now().subtract(Duration(days: 500000));
+      controller.selectIndex(4);
     });
   }
 
@@ -36,6 +37,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final entriesProvider = Provider.of<EntryListProvider>(context);
     final spendsProvider = Provider.of<SpentListProvider>(context);
+    print(FirebaseAuth.instance.currentUser?.uid);
 
     List<Entry> entradas = [];
     int totalEntradas = 0;
