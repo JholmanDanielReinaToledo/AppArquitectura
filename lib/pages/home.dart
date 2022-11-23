@@ -81,103 +81,114 @@ class _HomeState extends State<Home> {
           ),
         ),
         children: <Widget>[
-          GroupButton(
-            controller: controller,
-            isRadio: true,
-            options: GroupButtonOptions(
-              selectedColor: Config.blue,
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                GroupButton(
+                  controller: controller,
+                  isRadio: true,
+                  options: GroupButtonOptions(
+                    selectedColor: Config.blue,
+                  ),
+                  onSelected: (String, int, bool) {
+                    switch (int) {
+                      case 0:
+                        setState(() {
+                          fechaInicial =
+                              DateTime.now().subtract(Duration(days: 1));
+                        });
+                        break;
+                      case 1:
+                        setState(() {
+                          fechaInicial =
+                              DateTime.now().subtract(Duration(days: 7));
+                        });
+                        break;
+                      case 2:
+                        setState(() {
+                          fechaInicial =
+                              DateTime.now().subtract(Duration(days: 15));
+                        });
+                        break;
+                      case 3:
+                        setState(() {
+                          fechaInicial =
+                              DateTime.now().subtract(Duration(days: 30));
+                        });
+                        break;
+                      case 4:
+                        setState(() {
+                          fechaInicial =
+                              DateTime.now().subtract(Duration(days: 500000));
+                        });
+                        break;
+                      default:
+                    }
+                  },
+                  buttons: ["1 dia", "7 dias", "15 dias", "30 dias", "todos"],
+                ),
+                SfCircularChart(
+                  annotations: [
+                    CircularChartAnnotation(),
+                  ],
+                  series: <CircularSeries>[
+                    // Render pie chart
+                    PieSeries<ChartData, String>(
+                      dataSource: [
+                        ChartData(
+                          'Gastos',
+                          totalSalidas.toDouble(),
+                          Color.fromARGB(19, 199, 199, 199),
+                        ),
+                        ChartData(
+                          'Disponible',
+                          (totalEntradas - totalSalidas).toDouble(),
+                          Color.fromARGB(255, 92, 247, 144),
+                        ),
+                      ],
+                      animationDuration: 0,
+                      pointColorMapper: (ChartData data, _) => data.color,
+                      xValueMapper: (ChartData data, _) => data.x,
+                      dataLabelMapper: (datum, index) => datum.x,
+                      yValueMapper: (ChartData data, _) => data.y,
+                      dataLabelSettings: DataLabelSettings(isVisible: true),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'Total ingresos ${oCcy.format(totalEntradas).toString()}',
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'Total gastos ${oCcy.format(totalSalidas).toString()}',
+                    ),
+                    const Icon(
+                      Icons.amp_stories,
+                      color: Color.fromARGB(255, 199, 199, 199),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'Disponible ${oCcy.format(totalEntradas - totalSalidas).toString()}',
+                    ),
+                    const Icon(
+                      Icons.amp_stories,
+                      color: Color.fromARGB(255, 92, 247, 144),
+                    ),
+                  ],
+                ),
+              ],
             ),
-            onSelected: (String, int, bool) {
-              switch (int) {
-                case 0:
-                  setState(() {
-                    fechaInicial = DateTime.now().subtract(Duration(days: 1));
-                  });
-                  break;
-                case 1:
-                  setState(() {
-                    fechaInicial = DateTime.now().subtract(Duration(days: 7));
-                  });
-                  break;
-                case 2:
-                  setState(() {
-                    fechaInicial = DateTime.now().subtract(Duration(days: 15));
-                  });
-                  break;
-                case 3:
-                  setState(() {
-                    fechaInicial = DateTime.now().subtract(Duration(days: 30));
-                  });
-                  break;
-                case 4:
-                  setState(() {
-                    fechaInicial =
-                        DateTime.now().subtract(Duration(days: 500000));
-                  });
-                  break;
-                default:
-              }
-            },
-            buttons: ["1 dia", "7 dias", "15 dias", "30 dias", "todos"],
-          ),
-          SfCircularChart(
-            annotations: [
-              CircularChartAnnotation(),
-            ],
-            series: <CircularSeries>[
-              // Render pie chart
-              PieSeries<ChartData, String>(
-                dataSource: [
-                  ChartData(
-                    'Gastos',
-                    totalSalidas.toDouble(),
-                    Color.fromARGB(19, 199, 199, 199),
-                  ),
-                  ChartData(
-                    'Disponible',
-                    (totalEntradas - totalSalidas).toDouble(),
-                    Color.fromARGB(255, 92, 247, 144),
-                  ),
-                ],
-                pointColorMapper: (ChartData data, _) => data.color,
-                xValueMapper: (ChartData data, _) => data.x,
-                dataLabelMapper: (datum, index) => datum.x,
-                yValueMapper: (ChartData data, _) => data.y,
-                dataLabelSettings: DataLabelSettings(isVisible: true),
-              )
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'Total ingresos ${oCcy.format(totalEntradas).toString()}',
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'Total gastos ${oCcy.format(totalSalidas).toString()}',
-              ),
-              const Icon(
-                Icons.amp_stories,
-                color: Color.fromARGB(255, 199, 199, 199),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'Disponible ${oCcy.format(totalEntradas - totalSalidas).toString()}',
-              ),
-              const Icon(
-                Icons.amp_stories,
-                color: Color.fromARGB(255, 92, 247, 144),
-              ),
-            ],
           ),
         ],
       ),
