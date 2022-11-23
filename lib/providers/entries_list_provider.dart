@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:proyecto_prquitectura/db/index.dart';
@@ -70,7 +71,7 @@ class Entry {
     uid = json["uid"];
     value = json["value"];
     category = json["category"];
-    // date = json["date"];
+    date = (json['date'] as Timestamp).toDate();
     name = json["name"];
   }
 

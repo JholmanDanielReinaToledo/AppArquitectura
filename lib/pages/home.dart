@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:footer/footer.dart';
 import 'package:footer/footer_view.dart';
+import 'package:group_button/group_button.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_prquitectura/common/Config.dart';
@@ -11,16 +12,50 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 final oCcy = NumberFormat("\$#,##0", "en_US");
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    // final authService = Provider.of<AuthService2>(context);
-    // print(authService.user.displayName);
+  State<Home> createState() => _HomeState();
+}
 
+class _HomeState extends State<Home> {
+  late DateTime fechaInicial;
+  final controller = GroupButtonController();
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      fechaInicial = DateTime.now().subtract(Duration(days: 7));
+      controller.selectIndex(1);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final entriesProvider = Provider.of<EntryListProvider>(context);
     final spendsProvider = Provider.of<SpentListProvider>(context);
+
+    List<Entry> entradas = [];
+    int totalEntradas = 0;
+
+    List<Spent> salidas = [];
+    int totalSalidas = 0;
+
+    for (Entry entry in entriesProvider.entries) {
+      if (entry.date.isAfter(fechaInicial)) {
+        entradas.add(entry);
+        totalEntradas = totalEntradas + entry.value;
+      }
+    }
+
+    for (Spent spent in spendsProvider.spents) {
+      if (spent.date.isAfter(fechaInicial)) {
+        salidas.add(spent);
+        totalSalidas = totalSalidas + spent.value;
+      }
+    }
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -35,7 +70,7 @@ class Home extends StatelessWidget {
           padding: EdgeInsets.all(5),
           child: Center(
             child: Text(
-              'Disponible ${oCcy.format(entriesProvider.total - spendsProvider.total)}',
+              'Disponible ${oCcy.format(totalEntradas - totalSalidas)}',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -44,6 +79,45 @@ class Home extends StatelessWidget {
           ),
         ),
         children: <Widget>[
+          GroupButton(
+            controller: controller,
+            isRadio: true,
+            options: GroupButtonOptions(
+              selectedColor: Config.blue,
+            ),
+            onSelected: (String, int, bool) {
+              switch (int) {
+                case 0:
+                  setState(() {
+                    fechaInicial = DateTime.now().subtract(Duration(days: 1));
+                  });
+                  break;
+                case 1:
+                  setState(() {
+                    fechaInicial = DateTime.now().subtract(Duration(days: 7));
+                  });
+                  break;
+                case 2:
+                  setState(() {
+                    fechaInicial = DateTime.now().subtract(Duration(days: 15));
+                  });
+                  break;
+                case 3:
+                  setState(() {
+                    fechaInicial = DateTime.now().subtract(Duration(days: 30));
+                  });
+                  break;
+                case 4:
+                  setState(() {
+                    fechaInicial =
+                        DateTime.now().subtract(Duration(days: 500000));
+                  });
+                  break;
+                default:
+              }
+            },
+            buttons: ["1 dia", "7 dias", "15 dias", "30 dias", "todos"],
+          ),
           SfCircularChart(
             annotations: [
               CircularChartAnnotation(),
@@ -54,12 +128,12 @@ class Home extends StatelessWidget {
                 dataSource: [
                   ChartData(
                     'Gastos',
-                    spendsProvider.total.toDouble(),
+                    totalSalidas.toDouble(),
                     Color.fromARGB(19, 199, 199, 199),
                   ),
                   ChartData(
                     'Disponible',
-                    (entriesProvider.total - spendsProvider.total).toDouble(),
+                    (totalEntradas - totalSalidas).toDouble(),
                     Color.fromARGB(255, 92, 247, 144),
                   ),
                 ],
@@ -75,7 +149,7 @@ class Home extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                'Total ingresos ${oCcy.format(entriesProvider.total).toString()}',
+                'Total ingresos ${oCcy.format(totalEntradas).toString()}',
               ),
             ],
           ),
@@ -83,7 +157,7 @@ class Home extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                'Total gastos ${oCcy.format(spendsProvider.total).toString()}',
+                'Total gastos ${oCcy.format(totalSalidas).toString()}',
               ),
               const Icon(
                 Icons.amp_stories,
@@ -95,7 +169,7 @@ class Home extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                'Disponible ${oCcy.format(entriesProvider.total - spendsProvider.total).toString()}',
+                'Disponible ${oCcy.format(totalEntradas - totalSalidas).toString()}',
               ),
               const Icon(
                 Icons.amp_stories,
