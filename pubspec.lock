@@ -199,7 +199,7 @@ packages:
     source: hosted
     version: "4.0.1"
   intl:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: intl
       url: "https://pub.dartlang.org"
@@ -314,14 +314,14 @@ packages:
       name: syncfusion_flutter_charts
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "20.3.52"
+    version: "20.3.58"
   syncfusion_flutter_core:
     dependency: transitive
     description:
       name: syncfusion_flutter_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "20.3.52"
+    version: "20.3.58"
   term_glyph:
     dependency: transitive
     description:

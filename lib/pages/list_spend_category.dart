@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_prquitectura/common/Config.dart';
 import 'package:proyecto_prquitectura/providers/spend_categories_list.dart';
 import 'package:proyecto_prquitectura/widgets/card.dart';
 
@@ -13,6 +13,7 @@ class ListSpendCategories extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Config.blue,
         title: Text('Listado de categorias de los gastos'),
         leading: MaterialButton(
           child: Icon(Icons.arrow_left_rounded, color: Colors.white),

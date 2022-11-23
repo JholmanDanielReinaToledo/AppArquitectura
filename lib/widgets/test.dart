@@ -35,6 +35,7 @@ class _SpendFormState extends State<SpendForm> {
       spendCatProvider = Provider.of<SpendCategoriesListProvider>(context);
     });
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('Nuevo gasto'),
         backgroundColor: Config.blue,
