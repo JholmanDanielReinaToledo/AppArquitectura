@@ -254,40 +254,44 @@ class _HomeState extends State<Home> {
                   height: 40,
                 ),
                 Text("Gastos"),
-                SfCartesianChart(
-                  primaryXAxis: CategoryAxis(),
-                  primaryYAxis: NumericAxis(
-                      minimum: 0,
-                      maximum: maximoGastos,
-                      interval: maximoGastos / 4),
-                  series: <ChartSeries<ChartData2, String>>[
-                    ColumnSeries<ChartData2, String>(
-                        dataSource: gastos2,
-                        xValueMapper: (ChartData2 data, _) => data.x,
-                        yValueMapper: (ChartData2 data, _) => data.y,
-                        name: 'Gold',
-                        color: Color.fromRGBO(8, 142, 255, 1))
-                  ],
-                ),
+                gastos2.length > 0
+                    ? SfCartesianChart(
+                        primaryXAxis: CategoryAxis(),
+                        primaryYAxis: NumericAxis(
+                            minimum: 0,
+                            maximum: maximoGastos,
+                            interval: maximoGastos / 4),
+                        series: <ChartSeries<ChartData2, String>>[
+                          ColumnSeries<ChartData2, String>(
+                              dataSource: gastos2,
+                              xValueMapper: (ChartData2 data, _) => data.x,
+                              yValueMapper: (ChartData2 data, _) => data.y,
+                              name: 'Gold',
+                              color: Color.fromRGBO(8, 142, 255, 1))
+                        ],
+                      )
+                    : Text(""),
                 SizedBox(
                   height: 40,
                 ),
                 Text("Ingresos"),
-                SfCartesianChart(
-                  primaryXAxis: CategoryAxis(),
-                  primaryYAxis: NumericAxis(
-                      minimum: 0,
-                      maximum: maximoIngresos,
-                      interval: maximoIngresos / 4),
-                  series: <ChartSeries<ChartData2, String>>[
-                    ColumnSeries<ChartData2, String>(
-                        dataSource: ingresos2,
-                        xValueMapper: (ChartData2 data, _) => data.x,
-                        yValueMapper: (ChartData2 data, _) => data.y,
-                        name: 'Gold',
-                        color: Color.fromRGBO(8, 142, 255, 1))
-                  ],
-                ),
+                ingresos2.length > 0
+                    ? SfCartesianChart(
+                        primaryXAxis: CategoryAxis(),
+                        primaryYAxis: NumericAxis(
+                            minimum: 0,
+                            maximum: maximoIngresos,
+                            interval: maximoIngresos / 4),
+                        series: <ChartSeries<ChartData2, String>>[
+                          ColumnSeries<ChartData2, String>(
+                              dataSource: ingresos2,
+                              xValueMapper: (ChartData2 data, _) => data.x,
+                              yValueMapper: (ChartData2 data, _) => data.y,
+                              name: 'Gold',
+                              color: Color.fromRGBO(8, 142, 255, 1))
+                        ],
+                      )
+                    : Text(""),
               ],
             ),
           ),
