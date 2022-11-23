@@ -33,7 +33,6 @@ class AuthService {
 
       return await FirebaseAuth.instance.signInWithCredential(credential);
     } else {
-      print(FirebaseAuth.instance.currentUser);
       return FirebaseAuth.instance.currentUser;
     }
   }

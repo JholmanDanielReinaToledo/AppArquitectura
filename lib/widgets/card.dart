@@ -23,7 +23,7 @@ Card card(
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            FlatButton(
+            MaterialButton(
               onPressed: submit,
               child: Text('Detalles'),
             )

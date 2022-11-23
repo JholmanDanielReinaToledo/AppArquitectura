@@ -35,6 +35,7 @@ dependencies:
   syncfusion_flutter_charts:
   firebase_auth: ^4.1.3
   google_sign_in: ^5.4.2
+  cloud_firestore:
   
 
 

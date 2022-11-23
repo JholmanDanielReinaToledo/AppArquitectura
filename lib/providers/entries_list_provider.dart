@@ -1,8 +1,22 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:proyecto_prquitectura/db/index.dart';
 
 class EntryListProvider extends ChangeNotifier {
   List<Entry> entries = [];
   int total = 0;
+
+  EntryListProvider() {
+    cargarLista();
+  }
+
+  cargarLista() async {
+    entries = await DB().getEntries();
+    for (Entry item in entries) {
+      total = total + item.value;
+    }
+    notifyListeners();
+  }
 
   set updateEntries(Entry entry) {
     Entry index = entries.firstWhere((element) => element.uid == entry.uid);
@@ -32,9 +46,10 @@ class EntryListProvider extends ChangeNotifier {
 
   get getEntry => entries;
 
-  void insertEntry(Entry newPennd) {
-    entries.add(newPennd);
-    total = total + newPennd.value;
+  void insertEntry(Entry entry) {
+    DB().addEntry(entry);
+    entries.add(entry);
+    total = total + entry.value;
     notifyListeners();
   }
 }
@@ -45,4 +60,27 @@ class Entry {
   String category = "";
   DateTime date = DateTime.now();
   String name = "";
+  late String uidUser;
+
+  Entry() {
+    uidUser = FirebaseAuth.instance.currentUser!.uid;
+  }
+
+  Entry.fromJson(Map<String, dynamic> json) {
+    uid = json["uid"];
+    value = json["value"];
+    category = json["category"];
+    // date = json["date"];
+    name = json["name"];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['value'] = value;
+    _data['category'] = category;
+    _data['date'] = date;
+    _data['name'] = name;
+    _data['uidUser'] = uidUser;
+    return _data;
+  }
 }

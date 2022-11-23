@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:footer/footer.dart';
 import 'package:footer/footer_view.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_prquitectura/db/index.dart';
 import 'package:proyecto_prquitectura/providers/entries_list_provider.dart';
 import 'package:proyecto_prquitectura/providers/spent_list_provider.dart';
 import 'package:proyecto_prquitectura/services/auth.dart';
